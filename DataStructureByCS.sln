@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStructureByCS", "DataStructureByCS\DataStructureByCS.csproj", "{F3787494-6506-4CD4-8099-36A62931EB46}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{816A5DC9-26C3-49DD-AF09-A7CC7485094C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{9766DFFB-AE17-45C8-8DFD-5D7C1509B31A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreType", "CoreType\CoreType.csproj", "{949B51A3-4C67-4E51-9681-1B32FB3811BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F3787494-6506-4CD4-8099-36A62931EB46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3787494-6506-4CD4-8099-36A62931EB46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3787494-6506-4CD4-8099-36A62931EB46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3787494-6506-4CD4-8099-36A62931EB46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{949B51A3-4C67-4E51-9681-1B32FB3811BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{949B51A3-4C67-4E51-9681-1B32FB3811BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{949B51A3-4C67-4E51-9681-1B32FB3811BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{949B51A3-4C67-4E51-9681-1B32FB3811BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F3787494-6506-4CD4-8099-36A62931EB46} = {9766DFFB-AE17-45C8-8DFD-5D7C1509B31A}
+		{949B51A3-4C67-4E51-9681-1B32FB3811BB} = {816A5DC9-26C3-49DD-AF09-A7CC7485094C}
+	EndGlobalSection
+EndGlobal
