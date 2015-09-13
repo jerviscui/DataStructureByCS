@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Define\IVector.cs" />
+    <Compile Include="Implement\Fibonacci.cs" />
     <Compile Include="Implement\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

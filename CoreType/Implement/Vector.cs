@@ -1,4 +1,9 @@
-﻿using CoreType.Define;
+﻿/*
+** all of the array interval is left closed right away
+** [lo,hi)
+*/
+
+using CoreType.Define;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +20,9 @@ namespace CoreType.Implement
         private int _capacity;
         private T[] _element;
 
+        /// <summary>
+        /// C# 6.0
+        /// </summary>
         //public T[] Element => _element;
 
         //public T[] Element
@@ -66,9 +74,9 @@ namespace CoreType.Implement
             if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)))
             {
                 //ruan comapre
-                while (loRank < hiRank)
+                while (loRank < hiRank--)
                 {
-                    var item = _element[hiRank--] as IComparable<T>;
+                    var item = _element[hiRank] as IComparable<T>;
                     if (item != null && item.CompareTo(element) == 0)
                     {
                         return hiRank;
@@ -81,6 +89,74 @@ namespace CoreType.Implement
             }
 
             return -1;
+        }
+
+        private int BinarySearch(T element, int loRank, int hiRank)
+        {
+            var temp = element as IComparable<T>;
+
+            if (temp != null)
+            {
+                while (loRank < hiRank)
+                {
+                    int mi = (hiRank - loRank)/2;
+                    if (temp.CompareTo(_element[mi]) == -1)
+                    {
+                        hiRank = mi;
+                    }
+                    else if (temp.CompareTo(_element[mi]) == 1)
+                    {
+                        loRank = mi + 1;
+                    }
+                    else
+                    {
+                        return mi;
+                    }
+                }
+
+                return -1;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        private int FibonacciSearch(T element, int loRank, int hiRank)
+        {
+            var temp = element as IComparable<T>;
+
+            if (temp != null)
+            {
+                Fibonacci fib = new Fibonacci(hiRank - loRank);
+                while (loRank < hiRank)
+                {
+                    while (hiRank - loRank < fib.Get())
+                    {
+                        fib.Prev();
+                    }
+
+                    int mi = loRank + fib.Get() - 1;
+                    if (temp.CompareTo(_element[mi]) == -1)
+                    {
+                        hiRank = mi;
+                    }
+                    else if (temp.CompareTo(_element[mi]) == 1)
+                    {
+                        loRank = mi + 1;
+                    }
+                    else
+                    {
+                        return mi;
+                    }
+                }
+
+                return -1;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
         }
         #endregion
 
@@ -224,30 +300,34 @@ namespace CoreType.Implement
         /// <returns></returns>
         public int Search(T element)
         {
-            int rank = Find(element);
-            if (rank == -1)
-            {
-                int index = _size - 1;
-                bool has = false;
-                for (int i = index; i > 0; i--)
-                {
-                    var item = _element[i] as IComparable<T>;
-                    if (item != null && item.CompareTo(element) == -1)
-                    {
-                        has = true;
-                        if (item.CompareTo(_element[index]) == 1)
-                        {
-                            index = i;
-                        }
-                    }
-                }
-                if (has)
-                {
-                    return index;
-                }
-            }
+            return BinarySearch(element, 0, _size);
 
-            return rank;
+            return FibonacciSearch(element, 0, _size);
+
+            //int rank = Find(element);
+            //if (rank == -1)
+            //{
+            //    int index = _size - 1;
+            //    bool has = false;
+            //    for (int i = index; i > 0; i--)
+            //    {
+            //        var item = _element[i] as IComparable<T>;
+            //        if (item != null && item.CompareTo(element) == -1)
+            //        {
+            //            has = true;
+            //            if (item.CompareTo(_element[index]) == 1)
+            //            {
+            //                index = i;
+            //            }
+            //        }
+            //    }
+            //    if (has)
+            //    {
+            //        return index;
+            //    }
+            //}
+
+            //return rank;
         }
 
         /// <summary>
