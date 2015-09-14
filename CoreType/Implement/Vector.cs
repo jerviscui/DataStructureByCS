@@ -37,7 +37,8 @@ namespace CoreType.Implement
 
         private void CopyFrom(T[] array, int lowRank, int highRank)
         {
-            _element = new T[2 * (highRank - lowRank)];
+            _capacity = 2 * (highRank - lowRank);
+            _element = new T[_capacity];
             _size = 0;
 
             while (lowRank < highRank)
@@ -71,24 +72,21 @@ namespace CoreType.Implement
 
         private int Find(T element, int loRank, int hiRank)
         {
-            if (typeof(IComparable<T>).IsAssignableFrom(typeof(T)))
+            var item = element as IComparable<T>;
+
+            if (item != null)
             {
-                //ruan comapre
-                while (loRank < hiRank--)
+                while (loRank < hiRank && item.CompareTo(_element[--hiRank]) != 0)
                 {
-                    var item = _element[hiRank] as IComparable<T>;
-                    if (item != null && item.CompareTo(element) == 0)
-                    {
-                        return hiRank;
-                    }
+                    ;
                 }
+
+                return hiRank;
             }
             else
             {
-                throw new ArgumentException(nameof(element) + " is not emplementation IComparable<>");
+                throw new ArgumentException("element is not emplementation IComparable<>");
             }
-
-            return -1;
         }
 
         private int BinarySearch(T element, int loRank, int hiRank)
@@ -99,7 +97,7 @@ namespace CoreType.Implement
             {
                 while (loRank < hiRank)
                 {
-                    int mi = (hiRank - loRank)/2;
+                    int mi = (hiRank - loRank) / 2;
                     if (temp.CompareTo(_element[mi]) == -1)
                     {
                         hiRank = mi;
@@ -162,8 +160,22 @@ namespace CoreType.Implement
 
         public T this[int index]
         {
-            get { return _element[index]; }
-            set { _element[index] = value; }
+            get
+            {
+                if (index > _capacity - 1 || index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("index");
+                }
+                return _element[index];
+            }
+            set
+            {
+                if (index > _capacity - 1 || index < 0)
+                {
+                    throw new ArgumentOutOfRangeException("index");
+                }
+                _element[index] = value;
+            }
         }
 
         public Vector(int length = DefaultCapacity)
@@ -172,20 +184,21 @@ namespace CoreType.Implement
             _size = 0;
         }
 
-        public Vector(Vector<T> sourceVector, int length) : this(sourceVector, 0, length - 1)
+        public Vector(Vector<T> sourceVector, int length)
+            : this(sourceVector, 0, length)
         {
 
         }
 
         public Vector(Vector<T> sourceVector, int lowRank, int highRank)
         {
-            T[] temp = new T[sourceVector.Size()];
-            for (int i = 0; i < sourceVector.Size(); i++)
+            T[] temp = new T[highRank - lowRank];
+            for (int i = 0; i < highRank - lowRank; i++)
             {
-                temp[i] = sourceVector[i];
+                temp[i] = sourceVector[i + lowRank];
             }
 
-            CopyFrom(temp, lowRank, highRank);
+            CopyFrom(temp, 0, highRank - lowRank);
         }
 
         public Vector(T[] array, int lowRank, int highRank)
@@ -193,7 +206,8 @@ namespace CoreType.Implement
             CopyFrom(array, lowRank, highRank);
         }
 
-        public Vector(T[] array, int length) : this(array, 0, length - 1)
+        public Vector(T[] array, int length)
+            : this(array, 0, length)
         {
 
         }
@@ -216,9 +230,9 @@ namespace CoreType.Implement
         /// <returns></returns>
         public T Get(int rank)
         {
-            if (rank > _capacity - 1 || rank < 0)
+            if (rank > _size - 1 || rank < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(rank));
+                throw new ArgumentOutOfRangeException("rank");
             }
 
             return _element[rank];
@@ -231,9 +245,9 @@ namespace CoreType.Implement
         /// <param name="element"></param>
         public void Put(int rank, T element)
         {
-            if (rank > _capacity - 1 || rank < 0)
+            if (rank > _size - 1 || rank < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(rank));
+                throw new ArgumentOutOfRangeException("rank");
             }
 
             _element[rank] = element;
@@ -246,9 +260,9 @@ namespace CoreType.Implement
         /// <param name="element"></param>
         public void Insert(int rank, T element)
         {
-            if (rank > _capacity - 1 || rank < 0)
+            if (rank > _size || rank < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(rank));
+                throw new ArgumentOutOfRangeException("rank");
             }
 
             Expend();
@@ -267,15 +281,15 @@ namespace CoreType.Implement
         /// <returns></returns>
         public T Remove(int rank)
         {
-            if (rank > _capacity - 1 || rank < 0)
+            if (rank > _size - 1 || rank < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(rank));
+                throw new ArgumentOutOfRangeException("rank");
             }
 
             T temp = _element[rank];
-            for (int i = rank; i < _size; i++)
+            while (rank < _size)
             {
-                _element[rank] = _element[rank + 1];
+                _element[rank] = _element[++rank];
             }
             _size--;
 
@@ -290,7 +304,7 @@ namespace CoreType.Implement
         /// <returns></returns>
         public int Find(T element)
         {
-            return Find(element, 0, _size - 1);
+            return Find(element, 0, _size);
         }
 
         /// <summary>
@@ -388,7 +402,7 @@ namespace CoreType.Implement
                 if (Find(_element[i], 0, i) != -1)
                 {
                     Remove(i);
-                    count ++;
+                    count++;
                 }
             }
             _size -= count;
@@ -411,7 +425,7 @@ namespace CoreType.Implement
                     var item = _element[i] as IComparable<T>;
                     if (item.CompareTo(_element[i - 1]) != 0)
                     {
-                        _element[index ++] = _element[i];
+                        _element[index++] = _element[i];
                     }
                 }
 
