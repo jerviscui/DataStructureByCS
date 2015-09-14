@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoreType.Implement;
 
 namespace DataStructureByCS
 {
@@ -17,7 +18,13 @@ namespace DataStructureByCS
 		        Console.WriteLine(i);
 	        }
 
-	        Console.ReadLine();
+            Vector<int> intVector = new Vector<int>(new int[] { 1, 1, 1, 1, 1, 10 }, 3);
+            
+            var a = intVector[0];
+            var b = intVector[1];
+            var c = intVector[2];
+
+            Console.ReadLine();
         }
     }
 }
