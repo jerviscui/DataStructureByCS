@@ -10,6 +10,14 @@ namespace DataStructureByCS
     {
         static void Main(string[] args)
         {
+	        int i = 1;
+
+	        while (++i > 0 && i < 5)
+	        {
+		        Console.WriteLine(i);
+	        }
+
+	        Console.ReadLine();
         }
     }
 }

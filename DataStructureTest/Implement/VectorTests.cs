@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System.Runtime;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using CoreType.Implement;
 using System;
 using System.Collections.Generic;
@@ -8,109 +9,163 @@ using System.Threading.Tasks;
 
 namespace CoreType.Implement.Tests
 {
-    [TestClass()]
-    public class VectorTests
-    {
-        [TestMethod()]
-        public void VectorTest()
-        {
-            Assert.Fail();
-        }
+	[TestClass()]
+	public class VectorTests
+	{
+		[TestMethod()]
+		public void VectorTest()
+		{
+			Vector<int> intVector = new Vector<int>();
+			Assert.IsNotNull(intVector);
 
-        [TestMethod()]
-        public void VectorTest1()
-        {
-            Assert.Fail();
-        }
+			Vector<int> v2 = new Vector<int>(50);
+			Assert.IsNotNull(v2);
+			Assert.IsTrue(v2.Size() == 0);
+		}
 
-        [TestMethod()]
-        public void VectorTest2()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void VectorTest1()
+		{
+			Vector<int> intVector = new Vector<int>();
+			Assert.IsNotNull(intVector);
 
-        [TestMethod()]
-        public void VectorTest3()
-        {
-            Assert.Fail();
-        }
+			Vector<int> v2 = new Vector<int>(intVector, 50);
+			Assert.IsNotNull(v2);
+		}
 
-        [TestMethod()]
-        public void VectorTest4()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void VectorTest2()
+		{
+			Vector<int> intVector = new Vector<int>();
+			Assert.IsNotNull(intVector);
 
-        [TestMethod()]
-        public void SizeTest()
-        {
-            Assert.Fail();
-        }
+			Vector<int> v2 = new Vector<int>(intVector, 20, 30);
+			Assert.IsNotNull(v2);
+		}
 
-        [TestMethod()]
-        public void GetTest()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void VectorTest3()
+		{
+			Vector<int> intVector = new Vector<int>(new int[] { 1, 1, 1, 1, 1, 10 }, 3);
+			Assert.IsNotNull(intVector);
 
-        [TestMethod()]
-        public void PutTest()
-        {
-            Assert.Fail();
-        }
+			Assert.IsTrue(intVector.Size() == 3);
+			Assert.IsTrue(intVector[0] == 1, "0");
+			Assert.IsTrue(intVector[1] == 1, "1");
+			Assert.IsTrue(intVector[2] == 1, "2");
+		}
 
-        [TestMethod()]
-        public void InsertTest()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void VectorTest4()
+		{
+			Vector<int> intVector = new Vector<int>(new int[] { 1, 1, 1, 1, 1, 10 }, 0, 6);
+			Assert.IsNotNull(intVector);
 
-        [TestMethod()]
-        public void RemoveTest()
-        {
-            Assert.Fail();
-        }
+			Assert.IsTrue(intVector.Size() == 6);
+			Assert.IsTrue(intVector[0] == 1, "0");
+			Assert.IsTrue(intVector[1] == 1, "1");
+			Assert.IsTrue(intVector[2] == 1, "2");
+			Assert.IsTrue(intVector[5] == 10, "10");
+		}
 
-        [TestMethod()]
-        public void FindTest()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void SizeTest()
+		{
+			
+		}
 
-        [TestMethod()]
-        public void SearchTest()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void GetTest()
+		{
+			Vector<int> intVector = new Vector<int>(new int[] { 1, 1, 1, 1, 1, 10 }, 0, 6);
 
-        [TestMethod()]
-        public void DisorderedTest()
-        {
-            Assert.Fail();
-        }
+			Assert.IsTrue(intVector.Get(0) == 1, "0");
+			Assert.IsTrue(intVector.Get(5) == 10, "10");
+		}
 
-        [TestMethod()]
-        public void SortTest()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void PutTest()
+		{
+			Vector<int> intVector = new Vector<int>(new int[] { 1, 1, 1, 1, 1, 10 }, 0, 6);
 
-        [TestMethod()]
-        public void DeduplicateTest()
-        {
-            Assert.Fail();
-        }
+			intVector.Put(0, 20);
+			Assert.IsTrue(intVector.Get(0) == 20);
+		}
 
-        [TestMethod()]
-        public void UniqufiyTest()
-        {
-            Assert.Fail();
-        }
+		[TestMethod()]
+		public void InsertTest()
+		{
+			Vector<int> intVector = new Vector<int>(new int[] { 1, 2, 3, 4, 5 }, 0, 4);
 
-        [TestMethod()]
-        public void TraverseTest()
-        {
-            Assert.Fail();
-        }
-    }
+			//not expend
+			for (int i = 0; i < 4; i++)
+			{
+				intVector.Insert(4, i);
+			}
+			Assert.IsTrue(intVector.Size() == 8);
+			Assert.IsTrue(intVector[4] == 3, "4");
+			
+			//expend 
+			intVector.Insert(8, 20);
+			Assert.IsTrue(intVector.Size() == 8 + 1, "len");
+			Assert.IsTrue(intVector[8] == 20, "8");
+			Assert.IsTrue(intVector[7] == 0, "7");
+		}
+
+		[TestMethod()]
+		public void RemoveTest()
+		{
+			Vector<int> intVector = new Vector<int>(new int[] { 1, 2, 3, 4, 5 }, 5);
+
+			Assert.IsTrue(intVector.Remove(0) == 1, "times 1");
+			Assert.IsTrue(intVector.Remove(0) == 2, "2");
+			Assert.IsTrue(intVector.Size() == 5 - 2);
+		}
+
+		[TestMethod()]
+		public void FindTest()
+		{
+			Vector<int> intVector = new Vector<int>(new int[] { 1, 2, 3, 4, 1, 5, 5 }, 7);
+
+			Assert.IsTrue(intVector.Find(1) == 4, "times 1");
+			Assert.IsTrue(intVector.Find(5) == 6, "times 2");
+			Assert.IsTrue(intVector.Find(3) == 2, "times 3");
+		}
+
+		[TestMethod()]
+		public void SearchTest()
+		{
+			Assert.Fail();
+		}
+
+		[TestMethod()]
+		public void DisorderedTest()
+		{
+			Assert.Fail();
+		}
+
+		[TestMethod()]
+		public void SortTest()
+		{
+			Assert.Fail();
+		}
+
+		[TestMethod()]
+		public void DeduplicateTest()
+		{
+			Assert.Fail();
+		}
+
+		[TestMethod()]
+		public void UniqufiyTest()
+		{
+			Assert.Fail();
+		}
+
+		[TestMethod()]
+		public void TraverseTest()
+		{
+			Assert.Fail();
+		}
+	}
 }
