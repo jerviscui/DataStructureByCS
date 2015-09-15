@@ -120,6 +120,41 @@ namespace CoreType.Implement
             }
         }
 
+        /// <summary>
+        /// 二分查找的改进版，
+        /// 最好的情况略坏，但是最坏的情况会变好（右侧分支步长每次+1）
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="loRank"></param>
+        /// <param name="hiRank"></param>
+        /// <returns></returns>
+        private int BinarySearch2(T element, int loRank, int hiRank)
+        {
+            var temp = element as IComparable<T>;
+
+            if (temp != null)
+            {
+                while (loRank < hiRank)
+                {
+                    int mi = (hiRank - loRank) / 2;
+                    if (temp.CompareTo(_element[mi]) == -1)
+                    {
+                        hiRank = mi;
+                    }
+                    else
+                    {
+                        loRank = mi;
+                    }
+                }
+
+                return -1;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+
         private int FibonacciSearch(T element, int loRank, int hiRank)
         {
             var temp = element as IComparable<T>;
