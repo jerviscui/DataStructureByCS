@@ -18,11 +18,9 @@ namespace DataStructureByCS
 		        Console.WriteLine(i);
 	        }
 
-            Vector<int> intVector = new Vector<int>(new int[] { 1, 1, 1, 1, 1, 10 }, 3);
-            
-            var a = intVector[0];
-            var b = intVector[1];
-            var c = intVector[2];
+            Vector<int> intVector3 = new Vector<int>(new int[] { 1, 2, 2, 2, 4 }, 5);
+            bool a = intVector3.Search(2) == 4;
+            bool b = intVector3.Search(0) == -1;
 
             Console.ReadLine();
         }
