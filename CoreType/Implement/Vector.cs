@@ -97,7 +97,7 @@ namespace CoreType.Implement
             {
                 while (loRank < hiRank)
                 {
-                    int mi = (hiRank - loRank) / 2;
+                    int mi = loRank + (hiRank - loRank) / 2;
                     if (temp.CompareTo(_element[mi]) == -1)
                     {
                         hiRank = mi;
@@ -134,9 +134,9 @@ namespace CoreType.Implement
 
             if (temp != null)
             {
-                while (loRank < hiRank)
+                while (hiRank - loRank > 1)
                 {
-                    int mi = (hiRank - loRank) / 2;
+                    int mi = loRank + (hiRank - loRank) / 2;
                     if (temp.CompareTo(_element[mi]) == -1)
                     {
                         hiRank = mi;
@@ -147,7 +147,46 @@ namespace CoreType.Implement
                     }
                 }
 
-                return -1;
+                return temp.CompareTo(_element[loRank]) == 0 ? loRank : -1;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+
+        /// <summary>
+        /// 二分查找的改进版，
+        /// 再次改进，以使符合查找算法的语义
+        /// 中间元素小于目标元素就舍去左边，那么剩下右边的部分一定是大于等于目标元素，
+        /// 那么，在中间元素右边的部分存在全部大于目标元素或者大于和等于目标元素
+        /// 直到最后一刻 low==high 扫描结束，
+        /// 那么此时low位置的左边一定是小于等于目标 而右边一定是大于目标，所以找到了不大于目标元素的最右边元素的位置
+        /// </summary>
+        /// <param name="element"></param>
+        /// <param name="loRank"></param>
+        /// <param name="hiRank"></param>
+        /// <returns></returns>
+        private int BinarySearch3(T element, int loRank, int hiRank)
+        {
+            var temp = element as IComparable<T>;
+
+            if (temp != null)
+            {
+                while (hiRank > loRank)
+                {
+                    int mi = loRank + (hiRank - loRank) / 2;
+                    if (temp.CompareTo(_element[mi]) == -1)
+                    {
+                        hiRank = mi;
+                    }
+                    else
+                    {
+                        loRank = mi + 1;
+                    }
+                }
+
+                return loRank - 1;
             }
             else
             {
@@ -343,15 +382,19 @@ namespace CoreType.Implement
         }
 
         /// <summary>
-        /// find element, if not exist return element rank which is the last only one smaller than the element
+        /// find element, if not exist return element rank which is smaller than or equal the element and the lastest only one
         /// -有序向量
         /// </summary>
         /// <returns></returns>
         public int Search(T element)
         {
-            return BinarySearch(element, 0, _size);
+            //return BinarySearch(element, 0, _size);
 
-            return FibonacciSearch(element, 0, _size);
+            //return FibonacciSearch(element, 0, _size);
+
+            //return BinarySearch2(element, 0, _size);
+
+            return BinarySearch3(element, 0, _size);
 
             //int rank = Find(element);
             //if (rank == -1)

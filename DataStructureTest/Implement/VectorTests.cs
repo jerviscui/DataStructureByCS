@@ -135,10 +135,29 @@ namespace CoreType.Implement.Tests
 		[TestMethod()]
 		public void SearchTest()
 		{
-			Assert.Fail();
-		}
+            //binary search1
+            //Vector<int> intVector = new Vector<int>(new int[] { 1, 2, 2, 2, 4 }, 5);
+            //Assert.IsTrue(intVector.Search(2) == 2, "1-2");
+            //Assert.IsTrue(intVector.Search(0) == -1, "1-0");
 
-		[TestMethod()]
+            //fibonacci search
+            //Vector<int> intVector2 = new Vector<int>(new int[] { 1, 2, 2, 2, 2, 5, 6, 7, 8 }, 9);
+            //Assert.IsTrue(intVector2.Search(2) == 4, "2-2");
+            //Assert.IsTrue(intVector2.Search(5) == 5, "2-5");
+
+            //binary search2
+            //Vector<int> intVector3 = new Vector<int>(new int[] { 1, 2, 2, 2, 4 }, 5);
+            //Assert.IsTrue(intVector3.Search(2) == 3, "3-2");
+            //Assert.IsTrue(intVector3.Search(0) == -1, "3-0");
+
+            //binary search3
+            Vector<int> intVector3 = new Vector<int>(new int[] { 1, 2, 2, 2, 2, 4 }, 6);
+            Assert.IsTrue(intVector3.Search(2) == 4, "4-2");
+            Assert.IsTrue(intVector3.Search(0) == -1, "4-0");
+            Assert.IsTrue(intVector3.Search(5) == 5, "4-5");
+        }
+
+        [TestMethod()]
 		public void DisorderedTest()
 		{
 			Assert.Fail();
