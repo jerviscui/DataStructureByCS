@@ -120,6 +120,87 @@ namespace CoreType.Implement
             }
         }
 
+	    private void SwapForSort1(int loRank, ref int hiRank)
+	    {
+		    if (loRank > hiRank || loRank < 0 || hiRank > _size)
+		    {
+				throw new ArgumentOutOfRangeException("loRank");
+		    }
+
+		    for (int i = loRank; i < hiRank - 1; i++)
+		    {
+			    var item = _element[i] as IComparable<T>;
+			    if (item.CompareTo(_element[i + 1]) == 1)
+			    {
+				    T temp = _element[i];
+				    _element[i] = _element[i + 1];
+				    _element[i + 1] = temp;
+			    }
+		    }
+
+		    hiRank --;
+	    }
+
+		/// <summary>
+		/// 返回标志此次比较结果是否已经是有序向量
+		/// </summary>
+		/// <param name="loRank"></param>
+		/// <param name="hiRank"></param>
+		private bool SwapForSort2(int loRank, ref int hiRank)
+		{
+			if (loRank > hiRank || loRank < 0 || hiRank > _size)
+			{
+				throw new ArgumentOutOfRangeException("loRank");
+			}
+
+			bool isSorted = true;
+			for (int i = loRank; i < hiRank - 1; i++)
+			{
+				var item = _element[i] as IComparable<T>;
+				if (item.CompareTo(_element[i + 1]) == 1)
+				{
+					isSorted = false;
+					T temp = _element[i];
+					_element[i] = _element[i + 1];
+					_element[i + 1] = temp;
+				}
+			}
+
+			hiRank--;
+			return isSorted;
+		}
+
+		/// <summary>
+		/// 修改右侧标志位，以再下次比对中可以排除有序部分
+		/// </summary>
+		/// <param name="loRank"></param>
+		/// <param name="hiRank"></param>
+		private bool SwapForSort3(int loRank, ref int hiRank)
+		{
+			if (loRank > hiRank || loRank < 0 || hiRank > _size)
+			{
+				throw new ArgumentOutOfRangeException("loRank");
+			}
+
+			bool isSorted = true;
+			int rank = 0;
+			for (int i = loRank; i < hiRank - 1; i++)
+			{
+				var item = _element[i] as IComparable<T>;
+				if (item.CompareTo(_element[i + 1]) == 1)
+				{
+					isSorted = false;
+					T temp = _element[i];
+					_element[i] = _element[i + 1];
+					_element[i + 1] = temp;
+					rank = i + 1;
+				}
+			}
+
+			hiRank = rank;
+			return isSorted;
+		}
+
         /// <summary>
         /// 二分查找的改进版，
         /// 最好的情况略坏，但是最坏的情况会变好（右侧分支步长每次+1）
@@ -446,20 +527,43 @@ namespace CoreType.Implement
         /// </summary>
         public void Sort()
         {
+	        int loRank = 0;
+	        int hiRank = _size;
+			//while 循环遍历
+			//while (hiRank - loRank > 1)
+			//{
+			//	SwapForSort1(loRank, ref hiRank);
+			//}
+			//return;
+
+			//改进Sort算法，若前次已经有序则后面不需要再循环
+			//while (!SwapForSort2(loRank, ref hiRank) && hiRank - loRank > 1)
+			//{
+			//	;
+			//}
+
+			//再次改进，找到右侧已经有序的部分，并在后面的比对中排除
+			while (!SwapForSort3(loRank, ref hiRank) && hiRank - loRank > 1)
+			{
+				;
+			}
+
+	        return;
+	        
             if (Disordered())
             {
                 return;
             }
 
-            T temp;
-            for (int i = 0; i < _size; i++)
+			//V1
+	        for (int i = 0; i < _size; i++)
             {
                 for (int j = i + 1; j < _size; j++)
                 {
                     var item = _element[i] as IComparable<T>;
                     if (item.CompareTo(_element[j]) == -1)
                     {
-                        temp = _element[i];
+                        T temp = _element[i];
                         _element[i] = _element[j];
                         _element[j] = temp;
                     }

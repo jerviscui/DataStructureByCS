@@ -110,6 +110,18 @@ namespace CoreType.Implement.Tests
 			Assert.IsTrue(intVector.Size() == 8 + 1, "len");
 			Assert.IsTrue(intVector[8] == 20, "8");
 			Assert.IsTrue(intVector[7] == 0, "7");
+
+			Assert.IsTrue(intVector.Search(19) == 7, "s19");
+			intVector.Insert(intVector.Search(19) + 1, 19);
+			Assert.IsTrue(intVector[8] == 19);
+
+			for (int i = 5; i < 8; i++)
+			{
+				intVector[i] = 5;
+			}
+			Assert.IsTrue(intVector.Search(5) == 7, "s5");
+			intVector.Insert(intVector.Search(5) + 1, 5);
+			Assert.IsTrue(intVector[8] == 5);
 		}
 
 		[TestMethod()]
@@ -166,7 +178,18 @@ namespace CoreType.Implement.Tests
 		[TestMethod()]
 		public void SortTest()
 		{
-			Assert.Fail();
+			//1, 2, 5, 6, 7, 7, 8, 8, 9
+			Vector<int> intVector = new Vector<int>(new int[] { 9, 8, 7, 1, 2, 5, 6, 7, 8 }, 9);
+			intVector.Sort();
+			Assert.IsTrue(intVector[0] == 1, "1");
+			Assert.IsTrue(intVector[1] == 2, "2");
+			Assert.IsTrue(intVector[2] == 5, "5");
+			Assert.IsTrue(intVector[3] == 6, "6");
+			Assert.IsTrue(intVector[4] == 7, "7");
+			Assert.IsTrue(intVector[5] == 7, "7-2");
+			Assert.IsTrue(intVector[6] == 8, "8");
+			Assert.IsTrue(intVector[7] == 8, "8-2");
+			Assert.IsTrue(intVector[8] == 9, "9");
 		}
 
 		[TestMethod()]
