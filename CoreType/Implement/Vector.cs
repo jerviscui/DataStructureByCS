@@ -72,134 +72,35 @@ namespace CoreType.Implement
 
         private int Find(T element, int loRank, int hiRank)
         {
-            var item = element as IComparable<T>;
-
-            if (item != null)
+            while (loRank < hiRank && element.CompareTo(_element[--hiRank]) != 0)
             {
-                while (loRank < hiRank && item.CompareTo(_element[--hiRank]) != 0)
-                {
-                    ;
-                }
+                ;
+            }
 
-                return hiRank;
-            }
-            else
-            {
-                throw new ArgumentException("element is not emplementation IComparable<>");
-            }
+            return hiRank;
         }
 
         private int BinarySearch(T element, int loRank, int hiRank)
         {
-            var temp = element as IComparable<T>;
-
-            if (temp != null)
+            while (loRank < hiRank)
             {
-                while (loRank < hiRank)
+                int mi = loRank + (hiRank - loRank) / 2;
+                if (element.CompareTo(_element[mi]) == -1)
                 {
-                    int mi = loRank + (hiRank - loRank) / 2;
-                    if (temp.CompareTo(_element[mi]) == -1)
-                    {
-                        hiRank = mi;
-                    }
-                    else if (temp.CompareTo(_element[mi]) == 1)
-                    {
-                        loRank = mi + 1;
-                    }
-                    else
-                    {
-                        return mi;
-                    }
+                    hiRank = mi;
                 }
+                else if (_element[mi].CompareTo(element) == -1)
+                {
+                    loRank = mi + 1;
+                }
+                else
+                {
+                    return mi;
+                }
+            }
 
-                return -1;
-            }
-            else
-            {
-                throw new ArgumentException();
-            }
+            return -1;
         }
-
-	    private void SwapForSort1(int loRank, ref int hiRank)
-	    {
-		    if (loRank > hiRank || loRank < 0 || hiRank > _size)
-		    {
-				throw new ArgumentOutOfRangeException("loRank");
-		    }
-
-		    for (int i = loRank; i < hiRank - 1; i++)
-		    {
-			    var item = _element[i] as IComparable<T>;
-			    if (item.CompareTo(_element[i + 1]) == 1)
-			    {
-				    T temp = _element[i];
-				    _element[i] = _element[i + 1];
-				    _element[i + 1] = temp;
-			    }
-		    }
-
-		    hiRank --;
-	    }
-
-		/// <summary>
-		/// 返回标志此次比较结果是否已经是有序向量
-		/// </summary>
-		/// <param name="loRank"></param>
-		/// <param name="hiRank"></param>
-		private bool SwapForSort2(int loRank, ref int hiRank)
-		{
-			if (loRank > hiRank || loRank < 0 || hiRank > _size)
-			{
-				throw new ArgumentOutOfRangeException("loRank");
-			}
-
-			bool isSorted = true;
-			for (int i = loRank; i < hiRank - 1; i++)
-			{
-				var item = _element[i] as IComparable<T>;
-				if (item.CompareTo(_element[i + 1]) == 1)
-				{
-					isSorted = false;
-					T temp = _element[i];
-					_element[i] = _element[i + 1];
-					_element[i + 1] = temp;
-				}
-			}
-
-			hiRank--;
-			return isSorted;
-		}
-
-		/// <summary>
-		/// 修改右侧标志位，以再下次比对中可以排除有序部分
-		/// </summary>
-		/// <param name="loRank"></param>
-		/// <param name="hiRank"></param>
-		private bool SwapForSort3(int loRank, ref int hiRank)
-		{
-			if (loRank > hiRank || loRank < 0 || hiRank > _size)
-			{
-				throw new ArgumentOutOfRangeException("loRank");
-			}
-
-			bool isSorted = true;
-			int rank = 0;
-			for (int i = loRank; i < hiRank - 1; i++)
-			{
-				var item = _element[i] as IComparable<T>;
-				if (item.CompareTo(_element[i + 1]) == 1)
-				{
-					isSorted = false;
-					T temp = _element[i];
-					_element[i] = _element[i + 1];
-					_element[i + 1] = temp;
-					rank = i + 1;
-				}
-			}
-
-			hiRank = rank;
-			return isSorted;
-		}
 
         /// <summary>
         /// 二分查找的改进版，
@@ -211,29 +112,21 @@ namespace CoreType.Implement
         /// <returns></returns>
         private int BinarySearch2(T element, int loRank, int hiRank)
         {
-            var temp = element as IComparable<T>;
-
-            if (temp != null)
+            while (hiRank - loRank > 1)
             {
-                while (hiRank - loRank > 1)
+                int mi = loRank + (hiRank - loRank) / 2;
+                if (element.CompareTo(_element[mi]) == -1)
                 {
-                    int mi = loRank + (hiRank - loRank) / 2;
-                    if (temp.CompareTo(_element[mi]) == -1)
-                    {
-                        hiRank = mi;
-                    }
-                    else
-                    {
-                        loRank = mi;
-                    }
+                    hiRank = mi;
                 }
+                else
+                {
+                    loRank = mi;
+                }
+            }
 
-                return temp.CompareTo(_element[loRank]) == 0 ? loRank : -1;
-            }
-            else
-            {
-                throw new ArgumentException();
-            }
+            return element.CompareTo(_element[loRank]) == 0 ? loRank : -1;
+
         }
 
         /// <summary>
@@ -250,65 +143,170 @@ namespace CoreType.Implement
         /// <returns></returns>
         private int BinarySearch3(T element, int loRank, int hiRank)
         {
-            var temp = element as IComparable<T>;
-
-            if (temp != null)
+            while (hiRank > loRank)
             {
-                while (hiRank > loRank)
+                int mi = loRank + (hiRank - loRank) / 2;
+                if (element.CompareTo(_element[mi]) == -1)
                 {
-                    int mi = loRank + (hiRank - loRank) / 2;
-                    if (temp.CompareTo(_element[mi]) == -1)
-                    {
-                        hiRank = mi;
-                    }
-                    else
-                    {
-                        loRank = mi + 1;
-                    }
+                    hiRank = mi;
                 }
+                else
+                {
+                    loRank = mi + 1;
+                }
+            }
 
-                return loRank - 1;
-            }
-            else
-            {
-                throw new ArgumentException();
-            }
+            return loRank - 1;
         }
 
         private int FibonacciSearch(T element, int loRank, int hiRank)
         {
-            var temp = element as IComparable<T>;
-
-            if (temp != null)
+            Fibonacci fib = new Fibonacci(hiRank - loRank);
+            while (loRank < hiRank)
             {
-                Fibonacci fib = new Fibonacci(hiRank - loRank);
-                while (loRank < hiRank)
+                while (hiRank - loRank < fib.Get())
                 {
-                    while (hiRank - loRank < fib.Get())
-                    {
-                        fib.Prev();
-                    }
-
-                    int mi = loRank + fib.Get() - 1;
-                    if (temp.CompareTo(_element[mi]) == -1)
-                    {
-                        hiRank = mi;
-                    }
-                    else if (temp.CompareTo(_element[mi]) == 1)
-                    {
-                        loRank = mi + 1;
-                    }
-                    else
-                    {
-                        return mi;
-                    }
+                    fib.Prev();
                 }
 
-                return -1;
+                int mi = loRank + fib.Get() - 1;
+                if (element.CompareTo(_element[mi]) == -1)
+                {
+                    hiRank = mi;
+                }
+                else if (_element[mi].CompareTo(element) == 1)
+                {
+                    loRank = mi + 1;
+                }
+                else
+                {
+                    return mi;
+                }
             }
-            else
+
+            return -1;
+        }
+
+        private void SwapForSort1(int loRank, ref int hiRank)
+        {
+            if (loRank > hiRank || loRank < 0 || hiRank > _size)
             {
-                throw new ArgumentException();
+                throw new ArgumentOutOfRangeException("loRank");
+            }
+
+            for (int i = loRank; i < hiRank - 1; i++)
+            {
+                if (_element[i].CompareTo(_element[i + 1]) == 1)
+                {
+                    T temp = _element[i];
+                    _element[i] = _element[i + 1];
+                    _element[i + 1] = temp;
+                }
+            }
+
+            hiRank--;
+        }
+
+        /// <summary>
+        /// 返回标志此次比较结果是否已经是有序向量
+        /// </summary>
+        /// <param name="loRank"></param>
+        /// <param name="hiRank"></param>
+        private bool SwapForSort2(int loRank, ref int hiRank)
+        {
+            if (loRank > hiRank || loRank < 0 || hiRank > _size)
+            {
+                throw new ArgumentOutOfRangeException("loRank");
+            }
+
+            bool isSorted = true;
+            for (int i = loRank; i < hiRank - 1; i++)
+            {
+                if (_element[i].CompareTo(_element[i + 1]) == 1)
+                {
+                    isSorted = false;
+                    T temp = _element[i];
+                    _element[i] = _element[i + 1];
+                    _element[i + 1] = temp;
+                }
+            }
+
+            hiRank--;
+            return isSorted;
+        }
+
+        /// <summary>
+        /// 修改右侧标志位，以再下次比对中可以排除有序部分
+        /// </summary>
+        /// <param name="loRank"></param>
+        /// <param name="hiRank"></param>
+        private bool SwapForSort3(int loRank, ref int hiRank)
+        {
+            if (loRank > hiRank || loRank < 0 || hiRank > _size)
+            {
+                throw new ArgumentOutOfRangeException("loRank");
+            }
+
+            bool isSorted = true;
+            int rank = 0;
+            for (int i = loRank; i < hiRank - 1; i++)
+            {
+                if (_element[i].CompareTo(_element[i + 1]) == 1)
+                {
+                    isSorted = false;
+                    T temp = _element[i];
+                    _element[i] = _element[i + 1];
+                    _element[i + 1] = temp;
+                    rank = i + 1;
+                }
+            }
+
+            hiRank = rank;
+            return isSorted;
+        }
+
+        /// <summary>
+        /// 2-way merge sort
+        /// </summary>
+        /// <param name="loRank"></param>
+        /// <param name="hiRank"></param>
+        private void MergeSort(int loRank, int hiRank)
+        {
+            //递归基、
+            if (hiRank - loRank < 2)
+            {
+                return;
+            }
+
+            int mi = (hiRank - loRank) >> 2;
+
+            MergeSort(loRank, mi);
+            MergeSort(mi, hiRank);
+
+        }
+
+        private void Merge(int loRank, int middle, int hiRank)
+        {
+            int lLen = middle - loRank;
+            int rLen = hiRank - middle;
+            T[] temp = new T[lLen];
+            for (int i = 0; i < lLen; i++)
+            {
+                temp[i] = _element[i];
+            }
+
+            int index = 0;
+            for (int i = 0, j = middle; j < rLen || j >= rLen && i < rLen;)
+            {
+                //短路求值
+                if (j >= rLen || i < lLen && temp[i].CompareTo(_element[j]) == -1)
+                {
+                    _element[index++] = temp[i++];
+                }
+                if (j < rLen && i < lLen && _element[j].CompareTo(temp[i]) == -1)
+                {
+                    _element[index++] = _element[j++];
+                }
             }
         }
         #endregion
@@ -340,7 +338,7 @@ namespace CoreType.Implement
         }
 
         public Vector(Vector<T> sourceVector, int length)
-            : this(sourceVector, 0, length)
+                    : this(sourceVector, 0, length)
         {
 
         }
@@ -362,7 +360,7 @@ namespace CoreType.Implement
         }
 
         public Vector(T[] array, int length)
-            : this(array, 0, length)
+                    : this(array, 0, length)
         {
 
         }
@@ -512,8 +510,7 @@ namespace CoreType.Implement
             int len = _size;
             while (--len > 1)
             {
-                var item = _element[len] as IComparable<T>;
-                if (item.CompareTo(_element[len - 1]) == -1)
+                if (_element[len].CompareTo(_element[len - 1]) == -1)
                 {
                     return false;
                 }
@@ -527,36 +524,40 @@ namespace CoreType.Implement
         /// </summary>
         public void Sort()
         {
-	        int loRank = 0;
-	        int hiRank = _size;
-			//while 循环遍历
-			//while (hiRank - loRank > 1)
-			//{
-			//	SwapForSort1(loRank, ref hiRank);
-			//}
-			//return;
+            int loRank = 0;
+            int hiRank = _size;
+            //while 循环遍历
+            //while (hiRank - loRank > 1)
+            //{
+            //	SwapForSort1(loRank, ref hiRank);
+            //}
+            //return;
 
-			//改进Sort算法，若前次已经有序则后面不需要再循环
-			//while (!SwapForSort2(loRank, ref hiRank) && hiRank - loRank > 1)
-			//{
-			//	;
-			//}
+            //改进Sort算法，若前次已经有序则后面不需要再循环
+            //while (!SwapForSort2(loRank, ref hiRank) && hiRank - loRank > 1)
+            //{
+            //	;
+            //}
+            //return;
 
-			//再次改进，找到右侧已经有序的部分，并在后面的比对中排除
-			while (!SwapForSort3(loRank, ref hiRank) && hiRank - loRank > 1)
-			{
-				;
-			}
+            //再次改进，找到右侧已经有序的部分，并在后面的比对中排除
+            //while (!SwapForSort3(loRank, ref hiRank) && hiRank - loRank > 1)
+            //{
+            //    ;
+            //}
+            //return;
 
-	        return;
-	        
+            //merge sort
+            MergeSort(0, _size);
+            return;
+
             if (Disordered())
             {
                 return;
             }
 
-			//V1
-	        for (int i = 0; i < _size; i++)
+            //V1
+            for (int i = 0; i < _size; i++)
             {
                 for (int j = i + 1; j < _size; j++)
                 {
@@ -604,8 +605,7 @@ namespace CoreType.Implement
             {
                 for (int i = 1; i < _size; i++)
                 {
-                    var item = _element[i] as IComparable<T>;
-                    if (item.CompareTo(_element[i - 1]) != 0)
+                    if (_element[i].CompareTo(_element[i - 1]) != 0)
                     {
                         _element[index++] = _element[i];
                     }
