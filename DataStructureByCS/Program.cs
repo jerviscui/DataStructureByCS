@@ -18,11 +18,20 @@ namespace DataStructureByCS
 		        Console.WriteLine(i);
 	        }
 
-            Vector<int> intVector3 = new Vector<int>(new int[] { 1, 2, 2, 2, 4 }, 5);
-            bool a = intVector3.Search(2) == 4;
-            bool b = intVector3.Search(0) == -1;
+			MyList<int> aaa = new MyList<int>();
+			aaa.InsertAsFirst(10);
 
-            Console.ReadLine();
+			MyListNode<int> head = new MyListNode<int>(null, null, null);
+			MyListNode<int> last = new MyListNode<int>(null, head, null);
+	        head.Succeed = last;
+
+			MyListNode<int> bbb = new MyListNode<int>(5, head, last);
+	        bbb.InsertAsPred(10);
+
+	        var ccc = new MyList<int>(aaa, 0, 1);
+			Console.WriteLine(aaa.Last().Data);
+
+			Console.ReadLine();
         }
     }
 }
