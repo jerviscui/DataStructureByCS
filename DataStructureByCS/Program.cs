@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CoreType.Implement;
+using Core.CoreType.Implement;
 
 namespace DataStructureByCS
 {
@@ -21,14 +21,7 @@ namespace DataStructureByCS
 			MyList<int> aaa = new MyList<int>();
 			aaa.InsertAsFirst(10);
 
-			MyListNode<int> head = new MyListNode<int>(null, null, null);
-			MyListNode<int> last = new MyListNode<int>(null, head, null);
-	        head.Succeed = last;
-
-			MyListNode<int> bbb = new MyListNode<int>(5, head, last);
-	        bbb.InsertAsPred(10);
-
-	        var ccc = new MyList<int>(aaa, 0, 1);
+			var ccc = new MyList<int>(aaa, 0, 1);
 			Console.WriteLine(aaa.Last().Data);
 
 			Console.ReadLine();

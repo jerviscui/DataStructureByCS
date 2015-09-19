@@ -1,14 +1,7 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using CoreType.Define;
+using Core.CoreType.Define;
 
-namespace CoreType.Implement
+namespace Core.CoreType.Implement
 {
 	public class MyList<T> : IMyList<T> where T : IComparable<T>
 	{

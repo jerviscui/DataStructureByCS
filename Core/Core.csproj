@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{949B51A3-4C67-4E51-9681-1B32FB3811BB}</ProjectGuid>
+    <ProjectGuid>{71A4E162-CAFD-48A0-9BC3-8D425DCC0882}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CoreType</RootNamespace>
-    <AssemblyName>CoreType</AssemblyName>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>Core</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -41,13 +40,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Define\IMyList.cs" />
-    <Compile Include="Define\IMyListNode.cs" />
-    <Compile Include="Define\IVector.cs" />
-    <Compile Include="Implement\Fibonacci.cs" />
-    <Compile Include="Implement\MyList.cs" />
-    <Compile Include="Implement\MyListNode.cs" />
-    <Compile Include="Implement\Vector.cs" />
+    <Compile Include="Common\Fibonacci.cs" />
+    <Compile Include="CoreType\Define\IMyList.cs" />
+    <Compile Include="CoreType\Define\IMyListNode.cs" />
+    <Compile Include="CoreType\Define\IVector.cs" />
+    <Compile Include="CoreType\Implement\MyList.cs" />
+    <Compile Include="CoreType\Implement\MyListNode.cs" />
+    <Compile Include="CoreType\Implement\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
