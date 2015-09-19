@@ -11,20 +11,20 @@ namespace DataStructureByCS
     {
         static void Main(string[] args)
         {
-	        int i = 1;
+            int i = 1;
 
-	        while (++i > 0 && i < 5)
-	        {
-		        Console.WriteLine(i);
-	        }
+            while (++i > 0 && i < 5)
+            {
+                Console.WriteLine(i);
+            }
 
-			MyList<int> aaa = new MyList<int>();
-			aaa.InsertAsFirst(10);
+            MyList<int> aaa = new MyList<int>();
+            aaa.InsertAsFirst(10);
+            
+            var ccc = new MyList<int>(aaa, 0, 1);
+            Console.WriteLine(aaa.Last().Data);
 
-			var ccc = new MyList<int>(aaa, 0, 1);
-			Console.WriteLine(aaa.Last().Data);
-
-			Console.ReadLine();
+            Console.ReadLine();
         }
     }
 }

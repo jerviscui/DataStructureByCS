@@ -14,25 +14,37 @@ namespace Core.Common.Tests
         [TestMethod()]
         public void FibonacciTest()
         {
-            Assert.Fail();
+            //0,1,1,2,3,5,8,13,21,34,55
+            Fibonacci fib = new Fibonacci(13);
+            Assert.IsTrue(fib.Get() == 13, "==");
+
+            Fibonacci fib2 = new Fibonacci(35);
+            Assert.IsTrue(fib2.Get() == 55, "<");
         }
 
         [TestMethod()]
         public void GetTest()
         {
-            Assert.Fail();
+            
         }
 
         [TestMethod()]
         public void PrevTest()
         {
-            Assert.Fail();
+            Fibonacci fib = new Fibonacci(13);
+            Assert.IsTrue(fib.Get() == 13, "==");
+            fib.Prev();
+            Assert.IsTrue(fib.Get() == 8);
+            fib.Next();
+            Assert.IsTrue(fib.Get() == 13);
+            fib.Next();
+            Assert.IsTrue(fib.Get() == 21);
         }
 
         [TestMethod()]
         public void NextTest()
         {
-            Assert.Fail();
+
         }
     }
 }

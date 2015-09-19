@@ -69,7 +69,7 @@ namespace Core.CoreType.Implement
 
         private int Find(T element, int loRank, int hiRank)
         {
-            while (loRank < hiRank && element.CompareTo(_element[--hiRank]) != 0)
+            while (loRank < hiRank-- && element.CompareTo(_element[hiRank]) != 0)
             {
                 ;
             }
@@ -547,7 +547,7 @@ namespace Core.CoreType.Implement
             //return;
 
             //merge sort
-            MergeSort(0, _size);
+            MergeSort(loRank, _size);
             return;
 
             if (Disordered())
@@ -579,15 +579,18 @@ namespace Core.CoreType.Implement
         public int Deduplicate()
         {
             int count = 0;
-            for (int i = 1; i < _size; i++)
+            for (int i = 1; i < _size;)
             {
                 if (Find(_element[i], 0, i) != -1)
                 {
                     Remove(i);
                     count++;
                 }
+                else
+                {
+                    i++;
+                }
             }
-            _size -= count;
 
             return count;
         }
@@ -610,8 +613,8 @@ namespace Core.CoreType.Implement
                     }
                 }
 
-                int count = _size - (index + 1);
-                _size = index + 1;
+                int count = _size - index;
+                _size = index;
                 return count;
             }
             else

@@ -195,19 +195,42 @@ namespace Core.CoreType.Implement.Tests
         [TestMethod()]
         public void DeduplicateTest()
         {
-            Assert.Fail();
+            //9, 8, 7, 1, 2, 5, 6, 7, 8
+            Vector<int> intVector = new Vector<int>(new int[] { 9, 8, 7, 1, 2, 5, 6, 7, 8 }, 9);
+            //9, 8, 7, 1, 2, 5, 6
+            Assert.IsTrue(intVector.Deduplicate() == 2);
+            Assert.IsTrue(intVector[0] == 9, "9");
+            Assert.IsTrue(intVector[1] == 8, "8");
+            Assert.IsTrue(intVector[2] == 7, "7");
+            Assert.IsTrue(intVector[3] == 1, "1");
+            Assert.IsTrue(intVector[4] == 2, "2");
+            Assert.IsTrue(intVector[5] == 5, "5");
+            Assert.IsTrue(intVector[6] == 6, "6");
         }
 
         [TestMethod()]
         public void UniqufiyTest()
         {
-            Assert.Fail();
+            //9, 8, 7, 1, 2, 5, 6, 7, 8
+            Vector<int> intVector = new Vector<int>(new int[] { 9, 8, 7, 1, 2, 5, 6, 7, 8 }, 9);
+            intVector.Sort();
+            Assert.IsTrue(intVector.Uniqufiy() == 2);
+            Assert.IsTrue(intVector[0] == 1, "9");
+            Assert.IsTrue(intVector[1] == 2, "8");
+            Assert.IsTrue(intVector[2] == 5, "7");
+            Assert.IsTrue(intVector[3] == 6, "1");
+            Assert.IsTrue(intVector[4] == 7, "2");
+            Assert.IsTrue(intVector[5] == 8, "5");
+            Assert.IsTrue(intVector[6] == 9, "6");
         }
 
         [TestMethod()]
         public void TraverseTest()
         {
-            Assert.Fail();
+            Vector<int> intVector = new Vector<int>(new int[] { 1, 2, 3, 4, 5 }, 5);
+            int all = 0;
+            intVector.Traverse(o => all += o);
+            Assert.IsTrue(all == 5 * (5 + 1) / 2.0);
         }
     }
 }
