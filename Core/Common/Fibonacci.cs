@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace CoreType.Implement
+﻿namespace Core.Common
 {
     public class Fibonacci
     {
@@ -13,6 +7,10 @@ namespace CoreType.Implement
         private int _lNum = 0;
         private int _rNum = 1;
 
+        /// <summary>
+        /// 返回一个斐波尼奇数列，使当前项不小于num
+        /// </summary>
+        /// <param name="num"></param>
         public Fibonacci(int num)
         {
             //create fibonacci number not less than the num

@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CoreType.Implement;
+using Core.CoreType.Implement;
 
-namespace CoreType.Define
+namespace Core.CoreType.Define
 {
 	public interface IMyList<T> where T : IComparable<T>
 	{

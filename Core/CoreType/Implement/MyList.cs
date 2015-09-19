@@ -1,14 +1,7 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using CoreType.Define;
+using Core.CoreType.Define;
 
-namespace CoreType.Implement
+namespace Core.CoreType.Implement
 {
 	public class MyList<T> : IMyList<T> where T : IComparable<T>
 	{
@@ -22,11 +15,10 @@ namespace CoreType.Implement
 
 		private void CopyFrom(MyList<T> source, int start, int count)
 		{
-			MyListNode<T> head = new MyListNode<T>(source[start], _header, _trailer);
-			_header.Succeed = head;
+			MyListNode<T> next = new MyListNode<T>(source[start], _header, _trailer);
+			_header.Succeed = next;
 			_size++;
 
-			MyListNode<T> next = head;
 			for (int i = start + 1; i < count; i++)
 			{
 				var temp = next;
@@ -83,12 +75,12 @@ namespace CoreType.Implement
 			_size = 0;
 		}
 
-		public MyList(MyList<T> source)
+		public MyList(MyList<T> source) : this()
 		{
 			CopyFrom(source, 0, source.Size());
 		}
 
-		public MyList(MyList<T> source, int count)
+		public MyList(MyList<T> source, int count) : this()
 		{
 			if (count > source.Size())
 			{
@@ -104,11 +96,9 @@ namespace CoreType.Implement
 				throw new ArgumentOutOfRangeException("start", "start or count out of range");
 			}
 			
-			source.InsertAsLast(new MyListNode<T>(5, null, null).Data);
-
 			int index = 0;
 			MyListNode<T> first = source.First();
-			while (index++ < start)
+			while (++index < start)
 			{
 				first = first.Succeed;
 			}
@@ -128,7 +118,7 @@ namespace CoreType.Implement
 				}
 
 				MyListNode<T> item = _header.Succeed;
-				while (--index > 0)
+				while (index-- > 1)
 				{
 					item = item.Succeed;
 				}
@@ -144,7 +134,7 @@ namespace CoreType.Implement
 				}
 
 				MyListNode<T> item = _header.Succeed;
-				while (--index > 0)
+				while (index-- > 1)
 				{
 					item = item.Succeed;
 				}

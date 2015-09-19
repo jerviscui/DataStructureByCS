@@ -3,14 +3,11 @@
 ** [lo,hi)
 */
 
-using CoreType.Define;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Common;
+using Core.CoreType.Define;
 
-namespace CoreType.Implement
+namespace Core.CoreType.Implement
 {
     public class Vector<T> : IVector<T> where T : IComparable<T>
     {
@@ -72,7 +69,7 @@ namespace CoreType.Implement
 
         private int Find(T element, int loRank, int hiRank)
         {
-            while (loRank < hiRank && element.CompareTo(_element[--hiRank]) != 0)
+            while (loRank < hiRank-- && element.CompareTo(_element[hiRank]) != 0)
             {
                 ;
             }
@@ -278,10 +275,11 @@ namespace CoreType.Implement
                 return;
             }
 
-            int mi = (hiRank - loRank) >> 2;
+            int mi = loRank + ((hiRank - loRank) >> 1);
 
             MergeSort(loRank, mi);
             MergeSort(mi, hiRank);
+            Merge(loRank, mi, hiRank);
 
         }
 
@@ -292,20 +290,21 @@ namespace CoreType.Implement
             T[] temp = new T[lLen];
             for (int i = 0; i < lLen; i++)
             {
-                temp[i] = _element[i];
+                temp[i] = _element[loRank + i];
             }
 
-            int index = 0;
-            for (int i = 0, j = middle; j < rLen || j >= rLen && i < rLen;)
+            int index = loRank;
+            for (int i = 0, j = 0; i < lLen;)
             {
                 //短路求值
-                if (j >= rLen || i < lLen && temp[i].CompareTo(_element[j]) == -1)
+                if (j >= rLen || j < rLen && temp[i].CompareTo(_element[j + middle]) < 1)
                 {
                     _element[index++] = temp[i++];
                 }
-                if (j < rLen && i < lLen && _element[j].CompareTo(temp[i]) == -1)
+
+                if (j < rLen && i < lLen && temp[i].CompareTo(_element[j + middle]) == 1)
                 {
-                    _element[index++] = _element[j++];
+                    _element[index++] = _element[middle + j++];
                 }
             }
         }
@@ -502,7 +501,7 @@ namespace CoreType.Implement
         }
 
         /// <summary>
-        /// if all elements order by desc return true
+        /// if all elements order by asc return true
         /// </summary>
         /// <returns></returns>
         public bool Disordered()
@@ -548,7 +547,7 @@ namespace CoreType.Implement
             //return;
 
             //merge sort
-            MergeSort(0, _size);
+            MergeSort(loRank, _size);
             return;
 
             if (Disordered())
@@ -580,15 +579,18 @@ namespace CoreType.Implement
         public int Deduplicate()
         {
             int count = 0;
-            for (int i = 1; i < _size; i++)
+            for (int i = 1; i < _size;)
             {
                 if (Find(_element[i], 0, i) != -1)
                 {
                     Remove(i);
                     count++;
                 }
+                else
+                {
+                    i++;
+                }
             }
-            _size -= count;
 
             return count;
         }
@@ -611,8 +613,8 @@ namespace CoreType.Implement
                     }
                 }
 
-                int count = _size - (index + 1);
-                _size = index + 1;
+                int count = _size - index;
+                _size = index;
                 return count;
             }
             else

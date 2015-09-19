@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace CoreType.Define
+namespace Core.CoreType.Define
 {
     public interface IVector<T> 
     {
@@ -40,7 +35,7 @@ namespace CoreType.Define
         T Remove(int rank);
 
         /// <summary>
-        /// all elements order by desc
+        /// all elements order by asc
         /// </summary>
         /// <returns></returns>
         bool Disordered();
