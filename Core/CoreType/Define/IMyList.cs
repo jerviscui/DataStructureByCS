@@ -45,7 +45,7 @@ namespace Core.CoreType.Define
 		/// <param name="element"></param>
 		void InsertAfter(MyListNode<T> source, T element);
 
-		int Remove(T element);
+        T Remove(MyListNode<T> element);
 
 		bool Disordered();
 
@@ -55,9 +55,9 @@ namespace Core.CoreType.Define
 
 		MyListNode<T> Search(T element);
 
-		void Deduplicate();
+        int Deduplicate();
 
-		void Uniquify();
+        int Uniquify();
 
 		void Traverse(Action<T> action);
 	}
