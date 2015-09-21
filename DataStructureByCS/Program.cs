@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Common;
 using Core.CoreType.Implement;
 
 namespace DataStructureByCS
@@ -19,30 +20,33 @@ namespace DataStructureByCS
                 Console.WriteLine(i);
             }
 
-			Test aaa = new Test();
-	        aaa.Data = 10;
-	        Add(aaa);
-			Console.WriteLine(aaa.Data);
-			Add2(aaa);
-			Console.WriteLine(aaa.Data);
+            MyStack<string> result = new MyStack<string>();
+            MathExtension.ConvertDecimalToBase(ref result, 100, 5);
+            StringBuilder builder = new StringBuilder();
+            while (result.Size() > 0)
+            {
+                builder.Append(result.Pop());
+            }
+            Console.WriteLine("5x: " + builder.ToString());
+            
+            MathExtension.ConvertDecimalToBase(ref result, 100, 10);
+            builder.Clear();
+            while (result.Size() > 0)
+            {
+                builder.Append(result.Pop());
+            }
+            Console.WriteLine("10x: " + builder.ToString());
+
+            MathExtension.ConvertDecimalToBase(ref result, 100, 16);
+            builder.Clear();
+            while (result.Size() > 0)
+            {
+                builder.Append(result.Pop());
+            }
+            Console.WriteLine("16x: " + builder.ToString());
 
             Console.ReadLine();
         }
-
-	    private static void Add(Test a)
-	    {
-		    a.Data = 11;
-	    }
-
-		private static void Add2(Test a)
-		{
-			a = new Test();
-			a.Data = 12;
-		}
     }
-
-	public class Test
-	{
-		public int Data { get; set; }
-	}
+    
 }
