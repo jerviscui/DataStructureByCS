@@ -3,7 +3,8 @@ using Core.CoreType.Define;
 
 namespace Core.CoreType.Implement
 {
-	public class MyListNode<T> : IMyListNode<T>, IComparable<MyListNode<T>> where T : IComparable<T>
+	public class MyListNode<T> : IMyListNode<T>, IDisposable, IComparable<MyListNode<T>> 
+		where T : IComparable<T>
 	{
 		public MyListNode<T> Precursor { get; set; }
 
@@ -67,5 +68,12 @@ namespace Core.CoreType.Implement
 	    {
             return Data.CompareTo(other.Data);
         }
+
+		public void Dispose()
+		{
+			Succeed = null;
+			Precursor = null;
+			Data = default (T);
+		}
 	}
 }

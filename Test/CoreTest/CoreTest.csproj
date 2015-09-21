@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Common\FibonacciTests.cs" />
     <Compile Include="CoreType\Implement\MyListNodeTests.cs" />
+    <Compile Include="CoreType\Implement\MyListTests.cs" />
     <Compile Include="CoreType\Implement\VectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
