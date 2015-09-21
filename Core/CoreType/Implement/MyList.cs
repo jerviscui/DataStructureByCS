@@ -69,13 +69,14 @@ namespace Core.CoreType.Implement
         {
             while (start.Precursor != null && count-- > 0)
             {
+	            start = start.Precursor;
                 if (start.Data.CompareTo(dest) < 1)
                 {
                     return start;
                 }
             }
 
-            return null;
+			return start.Precursor;
         }
 
         /// <summary>
@@ -92,10 +93,10 @@ namespace Core.CoreType.Implement
                 last = last.Succeed;
             }
 
-            while (count > 0)
+            while (count > 1)
             {
                 MyListNode<T>max = SelectMax(start, count--);
-                last = Last().Precursor;
+                last = last.Precursor;
                 T data = max.Data;
                 max.Data = last.Data;
                 last.Data = data;
@@ -114,7 +115,7 @@ namespace Core.CoreType.Implement
             {
                 start = start.Succeed;
                 //temp >= start for select the lastest max element
-                if (temp.CompareTo(start) > -1)
+                if (start.CompareTo(temp) > -1)
                 {
                     temp = start;
                 }
@@ -122,6 +123,16 @@ namespace Core.CoreType.Implement
 
             return temp;
         }
+
+		private void InsertionSort(MyListNode<T> start, int count)
+	    {
+			for (int i = 0; i < count; i++)
+			{
+				InsertAfter(Search1(start.Data, i, start), start.Data);
+				start = start.Succeed;
+				Remove(start.Precursor);
+			}
+	    }
 
         #endregion
 
@@ -156,7 +167,7 @@ namespace Core.CoreType.Implement
 
             int index = 0;
             MyListNode<T> first = source.First();
-            while (++index < start)
+            while (index++ < start)
             {
                 first = first.Succeed;
             }
@@ -176,7 +187,7 @@ namespace Core.CoreType.Implement
                 }
 
                 MyListNode<T> item = _header.Succeed;
-                while (index-- > 1)
+                while (index-- > 0)
                 {
                     item = item.Succeed;
                 }
@@ -192,7 +203,7 @@ namespace Core.CoreType.Implement
                 }
 
                 MyListNode<T> item = _header.Succeed;
-                while (index-- > 1)
+                while (index-- > 0)
                 {
                     item = item.Succeed;
                 }
@@ -280,100 +291,125 @@ namespace Core.CoreType.Implement
             _size++;
         }
 
+		public T Remove(MyListNode<T> element)
+		{
+			element.Precursor.Succeed = element.Succeed;
+			element.Succeed.Precursor = element.Precursor;
+			_size--;
+			element.Dispose();
+
+			return element.Data;
+		}
+
+		public bool Disordered()
+		{
+			if (_size < 2)
+			{
+				return true;
+			}
+
+			MyListNode<T> next = First().Succeed;
+			int index = 1;
+			while (index++ < _size)
+			{
+				if (next.CompareTo(next.Precursor) == -1)
+				{
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		public void Sort()
+		{
+			//SelectionSort(First(), _size);
+			//return;
+
+			InsertionSort(First(), _size);
+		}
+
+		public MyListNode<T> Find(T element)
+		{
+			return Find(element, _size, _trailer);
+		}
+
+		public MyListNode<T> Search(T element)
+		{
+			return Search1(element, _size, _trailer);
+		}
+
+		public int Deduplicate()
+		{
+			//if size <= 0 then return
+			//and we can futher narrow range
+			if (_size < 2)
+			{
+				return 0;
+			}
+
+			MyListNode<T> item = First();
+			int rank = 1;
+			int count = 0;
+			while (item.Succeed != null)
+			{
+				item = item.Succeed;
+				var temp = Find(item.Data, rank, item);
+				if (temp != null)
+				{
+					Remove(temp);
+					count++;
+				}
+				else
+				{
+					rank++;
+				}
+			}
+
+			return count;
+		}
+
+		public int Uniquify()
+		{
+			if (_size < 2
+				)
+			{
+				return 0;
+			}
+
+			int count = 0;
+			MyListNode<T> item = First();
+			MyListNode<T> next = item.Succeed;
+			while (next != _trailer)
+			{
+				if (item.CompareTo(next) == 0)
+				{
+					next = next.Succeed;
+					count++;
+				}
+				else
+				{
+					item.Succeed = next;
+					next.Precursor = item;
+					item = item.Succeed;
+					next = item.Succeed;
+				}
+			}
+
+			_size -= count;
+			return count;
+		}
+
+		public void Traverse(Action<T> action)
+		{
+			MyListNode<T> next = First();
+			while (next != null && next != _trailer)
+			{
+				action(next.Data);
+				next = next.Succeed;
+			}
+		}
+
         #endregion
-
-        public T Remove(MyListNode<T> element)
-        {
-            element.Precursor.Succeed = element.Succeed;
-            element.Succeed.Precursor = element.Precursor;
-            _size--;
-
-            return element.Data;
-        }
-
-        public bool Disordered()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Sort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public MyListNode<T> Find(T element)
-        {
-            return Find(element, _size, _trailer);
-        }
-
-        public MyListNode<T> Search(T element)
-        {
-            return Search1(element, _size, Last());
-        }
-
-        public int Deduplicate()
-        {
-            //if size <= 0 then return
-            //and we can futher narrow range
-            if (_size < 2)
-            {
-                return 0;
-            }
-
-            MyListNode<T> item = First();
-            int rank = 1;
-            int count = 0;
-            while (_trailer != item.Succeed)
-            {
-                var temp = Find(item.Data, rank, item);
-                if (temp != null)
-                {
-                    Remove(temp);
-                    count++;
-                }
-                else
-                {
-                    rank++;
-                }
-            }
-
-            return count;
-        }
-
-        public int Uniquify()
-        {
-            if (_size < 2
-                )
-            {
-                return 0;
-            }
-
-            int count = 0;
-            MyListNode<T> item = First();
-            MyListNode<T> next = item.Succeed;
-            while (next != _trailer)
-            {
-                if (item.CompareTo(next) == 0)
-                {
-                    next = next.Succeed;
-                    count++;
-                }
-                else
-                {
-                    item.Succeed = next;
-                    next.Precursor = item;
-                    item = item.Succeed;
-                    next = item.Succeed;
-                }
-            }
-
-            _size -= count;
-            return count;
-        }
-
-        public void Traverse(Action<T> action)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
