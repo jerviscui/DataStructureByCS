@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Common\Fibonacci.cs" />
     <Compile Include="Common\Math.cs" />
+    <Compile Include="Common\StringExtension.cs" />
     <Compile Include="CoreType\Define\IMyList.cs" />
     <Compile Include="CoreType\Define\IMyListNode.cs" />
     <Compile Include="CoreType\Define\IMyStack.cs" />
