@@ -56,7 +56,7 @@
     <Compile Include="CoreType\Implement\MyListNodeTests.cs" />
     <Compile Include="CoreType\Implement\MyListTests.cs" />
     <Compile Include="CoreType\Implement\MyQueueTests.cs" />
-    <Compile Include="CoreType\Implement\MyMyStackTests.cs" />
+    <Compile Include="CoreType\Implement\MyStackTests.cs" />
     <Compile Include="CoreType\Implement\VectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

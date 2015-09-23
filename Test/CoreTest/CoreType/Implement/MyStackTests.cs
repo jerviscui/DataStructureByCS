@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace Core.CoreType.Implement.Tests
 {
     [TestClass()]
-    public class MyMyStackTests
+    public class MyStackTests
     {
         [TestMethod()]
         public void EmptyTest()
