@@ -20,5 +20,31 @@ namespace Core.Common.Tests
 
             Assert.IsFalse(result.Empty());
         }
+
+        [TestMethod()]
+        public void ArithmeticExpressionResultTest()
+        {
+            Assert.IsTrue(Math.Abs(MathExtension.ArithmeticExpressionResult("1+(2*3)+4") - 11) < 1e-6);
+
+            Assert.IsTrue(Math.Abs(MathExtension.ArithmeticExpressionResult("1+(2*3)+(2+3)*5") - 32) < 1e-6);
+
+            Assert.IsTrue(Math.Abs(MathExtension.ArithmeticExpressionResult("(1+2^3!-4)*(5!-(6-(7-(89-0!))))") - 2013) < 1e-6);
+        }
+
+        [TestMethod()]
+        public void FactorialBasicTest()
+        {
+            Assert.IsTrue(Math.Abs(MathExtension.FactorialBasic(1) - 1) < 1e-6, "1");
+            Assert.IsTrue(Math.Abs(MathExtension.FactorialBasic(3) - 6) < 1e-6);
+            Assert.IsTrue(Math.Abs(MathExtension.FactorialBasic(5) - 120) < 1e-6);
+        }
+
+        [TestMethod()]
+        public void GetRpnExpressionTest()
+        {
+            Assert.IsTrue(MathExtension.GetRpnExpression("1+(2*3)+4") == "123*+4+");
+
+            Assert.IsTrue(MathExtension.GetRpnExpression("1+(2*3)+(2+3)*5") == "123*+23+5*+");
+        }
     }
 }

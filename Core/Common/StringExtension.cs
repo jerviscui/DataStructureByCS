@@ -29,7 +29,7 @@ namespace Core.Common
             }
 
             MyStack<int> stack = new MyStack<int>();
-            while (content.Length >= 0)
+            while (content.Length > 0)
             {
                 int rIndex;
                 int lIndex = rIndex = content.Length;
@@ -42,12 +42,20 @@ namespace Core.Common
                     {
                         lIndex = index1;
                         element1 = i;
+                        if (lIndex == 0)
+                        {
+                            break;
+                        }
                     }
                     int index2 = content.IndexOf(rElements[i], StringComparison.Ordinal);
                     if (index2 > -1 && index2 < rIndex)
                     {
                         rIndex = index2;
                         element2 = i;
+                        if (rIndex == 0)
+                        {
+                            break;
+                        }
                     }
                 }
 
@@ -65,7 +73,7 @@ namespace Core.Common
                 else if (lIndex > rIndex)
                 {
                     //pop
-                    if (stack.Top() != element2)
+                    if (stack.Empty() || stack.Top() != element2)
                     {
                         return false;
                     }
@@ -78,7 +86,7 @@ namespace Core.Common
                 }
             }
 
-            return false;
+            return stack.Empty();
         }
     }
 }

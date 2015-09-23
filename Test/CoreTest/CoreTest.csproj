@@ -52,9 +52,11 @@
   <ItemGroup>
     <Compile Include="Common\FibonacciTests.cs" />
     <Compile Include="Common\MathExtensionTests.cs" />
+    <Compile Include="Common\StringExtensionTests.cs" />
     <Compile Include="CoreType\Implement\MyListNodeTests.cs" />
     <Compile Include="CoreType\Implement\MyListTests.cs" />
-    <Compile Include="CoreType\Implement\StackTests.cs" />
+    <Compile Include="CoreType\Implement\MyQueueTests.cs" />
+    <Compile Include="CoreType\Implement\MyMyStackTests.cs" />
     <Compile Include="CoreType\Implement\VectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
