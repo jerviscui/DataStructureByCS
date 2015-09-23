@@ -45,10 +45,12 @@
     <Compile Include="Common\StringExtension.cs" />
     <Compile Include="CoreType\Define\IMyList.cs" />
     <Compile Include="CoreType\Define\IMyListNode.cs" />
+    <Compile Include="CoreType\Define\IMyQueue.cs" />
     <Compile Include="CoreType\Define\IMyStack.cs" />
     <Compile Include="CoreType\Define\IVector.cs" />
     <Compile Include="CoreType\Implement\MyList.cs" />
     <Compile Include="CoreType\Implement\MyListNode.cs" />
+    <Compile Include="CoreType\Implement\MyQueue.cs" />
     <Compile Include="CoreType\Implement\MyStack.cs" />
     <Compile Include="CoreType\Implement\Vector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

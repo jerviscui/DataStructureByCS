@@ -296,9 +296,10 @@ namespace Core.CoreType.Implement
 			element.Precursor.Succeed = element.Succeed;
 			element.Succeed.Precursor = element.Precursor;
 			_size--;
+		    T data = element.Data;
 			element.Dispose();
 
-			return element.Data;
+			return data;
 		}
 
 		public bool Disordered()

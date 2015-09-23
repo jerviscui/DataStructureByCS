@@ -314,7 +314,7 @@ namespace Core.CoreType.Implement
         {
             get
             {
-                if (index > _size - 1 || index < 0)
+                if (index > _capacity - 1 || index < 0)
                 {
                     throw new ArgumentOutOfRangeException("index");
                 }
@@ -322,7 +322,7 @@ namespace Core.CoreType.Implement
             }
             set
             {
-                if (index > _size - 1 || index < 0)
+                if (index > _capacity - 1 || index < 0)
                 {
                     throw new ArgumentOutOfRangeException("index");
                 }
