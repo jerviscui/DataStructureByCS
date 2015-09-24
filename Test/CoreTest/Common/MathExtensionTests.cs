@@ -42,9 +42,20 @@ namespace Core.Common.Tests
         [TestMethod()]
         public void GetRpnExpressionTest()
         {
-            Assert.IsTrue(MathExtension.GetRpnExpression("1+(2*3)+4") == "123*+4+");
+			Assert.IsTrue(MathExtension.GetRpnExpression("1+(2*3)+4") == "1 2 3 * + 4 + ");
 
-            Assert.IsTrue(MathExtension.GetRpnExpression("1+(2*3)+(2+3)*5") == "123*+23+5*+");
+			Assert.IsTrue(MathExtension.GetRpnExpression("1+(2*3)+(2+3)*5") == "1 2 3 * + 2 3 + 5 * + ");
+			Assert.IsTrue(MathExtension.GetRpnExpression("1+(23*3)+(2+3)*5") == "1 23 3 * + 2 3 + 5 * + ");
         }
+
+		[TestMethod()]
+	    public void RpnExpressionResultTest()
+	    {
+			Assert.IsTrue(Math.Abs(MathExtension.RpnExpressionResult(
+				MathExtension.GetRpnExpression("1+(23*3)+(2+3)*5")) - 95) < 1e-6);
+
+			Assert.IsTrue(Math.Abs(MathExtension.RpnExpressionResult(
+				MathExtension.GetRpnExpression("1+(23*3)+(2^9)*5!")) - 61510) < 1e-6);
+	    }
     }
 }

@@ -43,7 +43,7 @@ namespace DataStructureByCS
             {
                 builder.Append(result.Pop());
             }
-            Console.WriteLine("16x: " + builder.ToString());
+			Console.WriteLine(MathExtension.GetRpnExpression("1+(23*3)+(2^9)*5!"));
 
             Console.ReadLine();
         }
