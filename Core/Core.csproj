@@ -43,11 +43,15 @@
     <Compile Include="Common\Fibonacci.cs" />
     <Compile Include="Common\Math.cs" />
     <Compile Include="Common\StringExtension.cs" />
+    <Compile Include="CoreType\Define\IBinNode.cs" />
+    <Compile Include="CoreType\Define\IBinTree.cs" />
     <Compile Include="CoreType\Define\IMyList.cs" />
     <Compile Include="CoreType\Define\IMyListNode.cs" />
     <Compile Include="CoreType\Define\IMyQueue.cs" />
     <Compile Include="CoreType\Define\IMyStack.cs" />
     <Compile Include="CoreType\Define\IVector.cs" />
+    <Compile Include="CoreType\Implement\BinNode.cs" />
+    <Compile Include="CoreType\Implement\BinTree.cs" />
     <Compile Include="CoreType\Implement\MyList.cs" />
     <Compile Include="CoreType\Implement\MyListNode.cs" />
     <Compile Include="CoreType\Implement\MyQueue.cs" />
