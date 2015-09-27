@@ -54,6 +54,7 @@
     <Compile Include="Common\MathExtensionTests.cs" />
     <Compile Include="Common\StringExtensionTests.cs" />
     <Compile Include="CoreType\Implement\BinNodeTests.cs" />
+    <Compile Include="CoreType\Implement\BinTreeTests.cs" />
     <Compile Include="CoreType\Implement\MyListNodeTests.cs" />
     <Compile Include="CoreType\Implement\MyListTests.cs" />
     <Compile Include="CoreType\Implement\MyQueueTests.cs" />

@@ -7,15 +7,19 @@ using Core.CoreType.Define;
 
 namespace Core.CoreType.Implement
 {
-    public class BinTree<T> : IBinTree<T>
+    public class BinTree<T> : IBinTree<T> where T : IComparable<T>
     {
         private int _size;
 
         private BinNode<T> _root;
 
-        public BinTree()
+        public BinTree(BinNode<T> node)
         {
-            _size = 0;
+            _root = node;
+            if (node != null)
+            {
+                _size = 1;
+            }
         }
 
         #region Public Method
@@ -25,8 +29,10 @@ namespace Core.CoreType.Implement
         /// <returns></returns>
         public virtual int UpdateHeight(IBinNode<T> node)
         {
-            return node.Height = 1 + Math.Max(node.LChild() != null ? node.LChild().Height : -1, 
+            int height = 1 + Math.Max(node.LChild() != null ? node.LChild().Height : -1,
                 node.RChild() != null ? node.RChild().Height : -1);
+
+            return node.Height = height;
         }
 
         /// <summary>
@@ -35,9 +41,15 @@ namespace Core.CoreType.Implement
         /// <param name="node"></param>
         public void UpdateHeightAbove(IBinNode<T> node)
         {
+            //可优化，如果当前节点高度无变化 即可以停止更新上层节点
             while (node != null)
             {
+                int height = node.Height;
                 UpdateHeight(node);
+                if (height == node.Height)
+                {
+                    break;
+                }
                 node = node.Parent();
             }
         }
@@ -45,6 +57,16 @@ namespace Core.CoreType.Implement
         public int Size()
         {
             return _size;
+        }
+
+        public int Height()
+        {
+            if (_root == null)
+            {
+                return -1;
+            }
+
+            return _root.Height;
         }
 
         public bool Empty()
@@ -59,7 +81,7 @@ namespace Core.CoreType.Implement
 
         public IBinNode<T> InsertAsLC(IBinNode<T> node, T data)
         {
-            node.insertAsLC(data);
+            node.InsertAsLC(data);
             UpdateHeightAbove(node);
             _size ++;
 
@@ -68,11 +90,59 @@ namespace Core.CoreType.Implement
 
         public IBinNode<T> InsertAsRC(IBinNode<T> node, T data)
         {
-            node.insertAsRC(data);
+            node.InsertAsRC(data);
             UpdateHeightAbove(node);
             _size ++;
 
             return node.LChild();
+        }
+
+        /// <summary>
+        /// levelorder traversal
+        /// </summary>
+        /// <param name="action"></param>
+        public void TravLevel(Action<T> action)
+        {
+            if (!Empty())
+            {
+                _root.TravLevel(action);
+            }
+        }
+
+        /// <summary>
+        /// preorder traversal
+        /// </summary>
+        /// <param name="action"></param>
+        public void TravPre(Action<T> action)
+        {
+            if (!Empty())
+            {
+                _root.TravPre(action);
+            }
+        }
+
+        /// <summary>
+        /// in sequence traversal
+        /// </summary>
+        /// <param name="action"></param>
+        public void TravIn(Action<T> action)
+        {
+            if (!Empty())
+            {
+                _root.TravIn(action);
+            }
+        }
+
+        /// <summary>
+        /// postorder traversal
+        /// </summary>
+        /// <param name="action"></param>
+        public void TravPost(Action<T> action)
+        {
+            if (!Empty())
+            {
+                _root.TravPost(action);
+            }
         }
 
         #endregion
