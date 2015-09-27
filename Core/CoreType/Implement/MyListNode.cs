@@ -28,7 +28,7 @@ namespace Core.CoreType.Implement
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public MyListNode<T> InsertAsPred(T data)
+		public IMyListNode<T> InsertAsPred(T data)
 		{
 			MyListNode<T> node = new MyListNode<T>(data, this.Precursor, this);
 		    if (this.Precursor != null)
@@ -45,7 +45,7 @@ namespace Core.CoreType.Implement
 		/// </summary>
 		/// <param name="data"></param>
 		/// <returns></returns>
-		public MyListNode<T> InsertAsSucc(T data)
+		public IMyListNode<T> InsertAsSucc(T data)
 		{
 			MyListNode<T> node = new MyListNode<T>(data, this, this.Succeed);
 		    if (this.Succeed != null)
