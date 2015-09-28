@@ -336,6 +336,14 @@ namespace Core.CoreType.Implement
             _size = 0;
         }
 
+        public Vector(int length, int count, T data) : this(length)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                this.Insert(data);
+            }
+        }
+
         public Vector(Vector<T> sourceVector, int length)
                     : this(sourceVector, 0, length)
         {
@@ -436,6 +444,11 @@ namespace Core.CoreType.Implement
             }
             _element[rank] = element;
             _size++;
+        }
+
+        public void Insert(T element)
+        {
+            Insert(_size, element);
         }
 
         /// <summary>

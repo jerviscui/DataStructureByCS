@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.CoreType.Define
 {
-    public interface IVertex<T> : IComparable<T> where T : IComparable<T>
+    public interface IVertex<T> where T : IComparable<T>
     {
         T Data { get; set; }
 
