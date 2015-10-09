@@ -17,6 +17,16 @@ namespace Core.CoreType.Implement
 
         private int _vertexCount;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:System.Object"/> class.
+        /// </summary>
+        public Graph(Vector<Vertex<TV>> vertexes, Vector<Vector<Edge<TE>>> edges)
+        {
+            _vertexes = vertexes;
+            _edges = edges;
+            _vertexCount = vertexes.Size();
+        }
+
         #region Edge Operation
         /// <summary>
         /// 判断边是否存在

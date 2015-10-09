@@ -575,6 +575,7 @@ namespace Core.CoreType.Implement
             MergeSort(loRank, _size);
             return;
 
+            //O(n2)
             if (Disordered())
             {
                 return;

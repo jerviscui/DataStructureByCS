@@ -20,13 +20,13 @@ namespace Core.CoreType.Define
         /// </summary>
         int Height { get; set; }
 
-        IBinNode<T> LChild();
+        IBinNode<T> LChild { get; set; }
 
-        IBinNode<T> RChild();
+        IBinNode<T> RChild { get; set; }
 
-        IBinNode<T> Parent();
+        IBinNode<T> Parent { get; set; }
 
-        T Data();
+        T Data { get; set; }
 
         /// <summary>
         /// insert left child 

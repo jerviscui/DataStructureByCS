@@ -31,7 +31,7 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(20);
-            Assert.IsTrue(node.LChild().Data() == 20);
+            Assert.IsTrue(node.LChild.Data == 20);
         }
 
         [TestMethod()]
@@ -39,7 +39,7 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(20);
-            Assert.IsTrue(node.LChild().Data() == 20);
+            Assert.IsTrue(node.LChild.Data == 20);
         }
 
         [TestMethod()]
@@ -47,7 +47,7 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(20);
-            Assert.IsTrue(node.LChild().Parent().Data() == 10);
+            Assert.IsTrue(node.LChild.Parent.Data == 10);
         }
 
         [TestMethod()]
@@ -55,16 +55,16 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(20);
-            Assert.IsTrue(node.LChild() != null);
+            Assert.IsTrue(node.LChild != null);
         }
 
         [TestMethod()]
         public void InsertAsRCTest()
         {
             BinNode<int> node = new BinNode<int>(10);
-            Assert.IsFalse(node.RChild() != null);
+            Assert.IsFalse(node.RChild != null);
             node.InsertAsRC(20);
-            Assert.IsTrue(node.RChild() != null);
+            Assert.IsTrue(node.RChild != null);
         }
 
         [TestMethod()]
@@ -74,9 +74,9 @@ namespace Core.CoreType.Implement.Tests
             node.InsertAsLC(15);
             node.InsertAsRC(20);
 
-            Assert.IsTrue(node.Succ().Data() == 20);
-            Assert.IsTrue(node.LChild().Succ() == node);
-            Assert.IsTrue(node.RChild().Succ() == null);
+            Assert.IsTrue(node.Succ().Data == 20);
+            Assert.IsTrue(node.LChild.Succ() == node);
+            Assert.IsTrue(node.RChild.Succ() == null);
         }
 
         [TestMethod()]
@@ -84,10 +84,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(15);
-            node.LChild().InsertAsLC(16);
-            node.LChild().InsertAsRC(17);
+            node.LChild.InsertAsLC(16);
+            node.LChild.InsertAsRC(17);
             node.InsertAsRC(20);
-            node.RChild().InsertAsLC(21);
+            node.RChild.InsertAsLC(21);
 
             int sum = 0;
             node.TravLevel(o => sum += o);
@@ -99,10 +99,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(15);
-            node.LChild().InsertAsLC(16);
-            node.LChild().InsertAsRC(17);
+            node.LChild.InsertAsLC(16);
+            node.LChild.InsertAsRC(17);
             node.InsertAsRC(20);
-            node.RChild().InsertAsLC(21);
+            node.RChild.InsertAsLC(21);
 
             int sum = 0;
             node.TravPre(o => sum += o);
@@ -114,10 +114,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(15);
-            node.LChild().InsertAsLC(16);
-            node.LChild().InsertAsRC(17);
+            node.LChild.InsertAsLC(16);
+            node.LChild.InsertAsRC(17);
             node.InsertAsRC(20);
-            node.RChild().InsertAsRC(21);
+            node.RChild.InsertAsRC(21);
 
             int sum = 0;
             node.TravIn(o => sum += o);
@@ -129,10 +129,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinNode<int> node = new BinNode<int>(10);
             node.InsertAsLC(15);
-            node.LChild().InsertAsLC(16);
-            node.LChild().InsertAsRC(17);
+            node.LChild.InsertAsLC(16);
+            node.LChild.InsertAsRC(17);
             node.InsertAsRC(20);
-            node.RChild().InsertAsRC(21);
+            node.RChild.InsertAsRC(21);
 
             int sum = 0;
             node.TravPost(o => sum += o);
@@ -140,10 +140,10 @@ namespace Core.CoreType.Implement.Tests
 
             node = new BinNode<int>(10);
             node.InsertAsLC(15);
-            node.LChild().InsertAsLC(16);
-            node.LChild().InsertAsRC(17);
+            node.LChild.InsertAsLC(16);
+            node.LChild.InsertAsRC(17);
             node.InsertAsRC(20);
-            node.RChild().InsertAsLC(21);
+            node.RChild.InsertAsLC(21);
 
             sum = 0;
             node.TravPost(o => sum += o);
@@ -162,7 +162,7 @@ namespace Core.CoreType.Implement.Tests
         public void DataTest()
         {
             BinNode<int> node = new BinNode<int>(10);
-            Assert.IsTrue(node.Data() == 10);
+            Assert.IsTrue(node.Data == 10);
         }
     }
 }
