@@ -20,30 +20,11 @@ namespace DataStructureByCS
                 Console.WriteLine(i);
             }
 
-            MyStack<string> result = new MyStack<string>();
-            MathExtension.ConvertDecimalToBase(ref result, 100, 5);
-            StringBuilder builder = new StringBuilder();
-            while (result.Size() > 0)
-            {
-                builder.Append(result.Pop());
-            }
-            Console.WriteLine("5x: " + builder.ToString());
-            
-            MathExtension.ConvertDecimalToBase(ref result, 100, 10);
-            builder.Clear();
-            while (result.Size() > 0)
-            {
-                builder.Append(result.Pop());
-            }
-            Console.WriteLine("10x: " + builder.ToString());
-
-            MathExtension.ConvertDecimalToBase(ref result, 100, 16);
-            builder.Clear();
-            while (result.Size() > 0)
-            {
-                builder.Append(result.Pop());
-            }
-			Console.WriteLine(MathExtension.GetRpnExpression("1+(23*3)+(2^9)*5!"));
+            BST<int> bst = new BST<int>(new BinNode<int>(15));
+            bst.InsertAsLC(bst.Root(), 10);
+            bst.InsertAsRC(bst.Root(), 20);
+            var aaa = bst.Search(21);
+            bst.Insert(21);
 
             Console.ReadLine();
         }

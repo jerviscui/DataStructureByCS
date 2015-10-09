@@ -9,9 +9,9 @@ namespace Core.CoreType.Implement
 {
     public class BinTree<T> : IBinTree<T> where T : IComparable<T>
     {
-        private int _size;
+        protected int _size;
 
-        private BinNode<T> _root;
+        protected IBinNode<T> _root;
 
         public BinTree(BinNode<T> node)
         {
@@ -29,8 +29,8 @@ namespace Core.CoreType.Implement
         /// <returns></returns>
         public virtual int UpdateHeight(IBinNode<T> node)
         {
-            int height = 1 + Math.Max(node.LChild() != null ? node.LChild().Height : -1,
-                node.RChild() != null ? node.RChild().Height : -1);
+            int height = 1 + Math.Max(node.LChild != null ? node.LChild.Height : -1,
+                node.RChild != null ? node.RChild.Height : -1);
 
             return node.Height = height;
         }
@@ -50,7 +50,7 @@ namespace Core.CoreType.Implement
                 {
                     break;
                 }
-                node = node.Parent();
+                node = node.Parent;
             }
         }
 
@@ -85,7 +85,7 @@ namespace Core.CoreType.Implement
             UpdateHeightAbove(node);
             _size ++;
 
-            return node.LChild();
+            return node.LChild;
         }
 
         public IBinNode<T> InsertAsRC(IBinNode<T> node, T data)
@@ -94,7 +94,7 @@ namespace Core.CoreType.Implement
             UpdateHeightAbove(node);
             _size ++;
 
-            return node.LChild();
+            return node.LChild;
         }
 
         /// <summary>

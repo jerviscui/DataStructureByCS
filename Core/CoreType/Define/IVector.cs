@@ -77,5 +77,7 @@ namespace Core.CoreType.Define
         /// 遍历 
         /// </summary>
         void Traverse(Action<T> action);
+
+        T this[int rank] { get; set; }
     }
 }

@@ -94,24 +94,37 @@ namespace Core.CoreType.Implement
         /// </summary>
         public int Height { get; set; }
 
-        public IBinNode<T> LChild()
+        public IBinNode<T> LChild
         {
-            return _lChild;
+            get
+            {
+                return _lChild;
+            }
+            set { _lChild = value as BinNode<T>; }
         }
 
-        public IBinNode<T> RChild()
+        public IBinNode<T> RChild
         {
-            return _rChild;
+            get
+            {
+                return _rChild;
+            }
+            set { _rChild = value as BinNode<T>; }
         }
 
-        public IBinNode<T> Parent()
+        public IBinNode<T> Parent
         {
-            return _parent;
+            get
+            {
+                return _parent;
+            }
+            set { _parent = value as BinNode<T>; }
         }
 
-        public T Data()
+        public T Data
         {
-            return _data;
+            get {return _data;}
+            set { _data = value; }
         }
 
         /// <summary>

@@ -23,9 +23,9 @@ namespace Core.CoreType.Implement.Tests
         {
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsLC(tree.Root(), 15);
-            Assert.IsTrue(tree.Root().LChild().Height == 0, "lchild");
-            tree.InsertAsLC(tree.Root().LChild(), 16);
-            Assert.IsTrue(tree.UpdateHeight(tree.Root().LChild()) == 1);
+            Assert.IsTrue(tree.Root().LChild.Height == 0, "lchild");
+            tree.InsertAsLC(tree.Root().LChild, 16);
+            Assert.IsTrue(tree.UpdateHeight(tree.Root().LChild) == 1);
         }
 
         [TestMethod()]
@@ -33,8 +33,8 @@ namespace Core.CoreType.Implement.Tests
         {
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsLC(tree.Root(), 15);
-            Assert.IsTrue(tree.Root().LChild().Height == 0, "lchild");
-            tree.InsertAsLC(tree.Root().LChild(), 16);
+            Assert.IsTrue(tree.Root().LChild.Height == 0, "lchild");
+            tree.InsertAsLC(tree.Root().LChild, 16);
             Assert.IsTrue(tree.Root().Height == 2);
         }
 
@@ -76,7 +76,7 @@ namespace Core.CoreType.Implement.Tests
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsLC(tree.Root(), 15);
 
-            Assert.IsTrue(tree.Root().LChild().Data() == 15);
+            Assert.IsTrue(tree.Root().LChild.Data == 15);
         }
 
         [TestMethod()]
@@ -85,7 +85,7 @@ namespace Core.CoreType.Implement.Tests
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsRC(tree.Root(), 20);
 
-            Assert.IsTrue(tree.Root().RChild().Data() == 20);
+            Assert.IsTrue(tree.Root().RChild.Data == 20);
         }
 
         [TestMethod()]
@@ -93,10 +93,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsLC(tree.Root(), 15);
-            tree.InsertAsLC(tree.Root().LChild(), 16);
-            tree.InsertAsRC(tree.Root().LChild(), 17);
+            tree.InsertAsLC(tree.Root().LChild, 16);
+            tree.InsertAsRC(tree.Root().LChild, 17);
             tree.InsertAsRC(tree.Root(), 20);
-            tree.InsertAsLC(tree.Root().RChild(), 21);
+            tree.InsertAsLC(tree.Root().RChild, 21);
             
             int sum = 0;
             tree.TravLevel(o => sum += o);
@@ -108,10 +108,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsLC(tree.Root(), 15);
-            tree.InsertAsLC(tree.Root().LChild(), 16);
-            tree.InsertAsRC(tree.Root().LChild(), 17);
+            tree.InsertAsLC(tree.Root().LChild, 16);
+            tree.InsertAsRC(tree.Root().LChild, 17);
             tree.InsertAsRC(tree.Root(), 20);
-            tree.InsertAsLC(tree.Root().RChild(), 21);
+            tree.InsertAsLC(tree.Root().RChild, 21);
 
             int sum = 0;
             tree.TravPre(o => sum += o);
@@ -123,10 +123,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsLC(tree.Root(), 15);
-            tree.InsertAsLC(tree.Root().LChild(), 16);
-            tree.InsertAsRC(tree.Root().LChild(), 17);
+            tree.InsertAsLC(tree.Root().LChild, 16);
+            tree.InsertAsRC(tree.Root().LChild, 17);
             tree.InsertAsRC(tree.Root(), 20);
-            tree.InsertAsLC(tree.Root().RChild(), 21);
+            tree.InsertAsLC(tree.Root().RChild, 21);
 
             int sum = 0;
             tree.TravIn(o => sum += o);
@@ -138,10 +138,10 @@ namespace Core.CoreType.Implement.Tests
         {
             BinTree<int> tree = new BinTree<int>(new BinNode<int>(10));
             tree.InsertAsLC(tree.Root(), 15);
-            tree.InsertAsLC(tree.Root().LChild(), 16);
-            tree.InsertAsRC(tree.Root().LChild(), 17);
+            tree.InsertAsLC(tree.Root().LChild, 16);
+            tree.InsertAsRC(tree.Root().LChild, 17);
             tree.InsertAsRC(tree.Root(), 20);
-            tree.InsertAsLC(tree.Root().RChild(), 21);
+            tree.InsertAsLC(tree.Root().RChild, 21);
 
             int sum = 0;
             tree.TravPost(o => sum += o);
