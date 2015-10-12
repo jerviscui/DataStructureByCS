@@ -20,7 +20,7 @@ namespace DataStructureByCS
                 Console.WriteLine(i);
             }
 
-            BST<int> bst = new BST<int>(new BinNode<int>(15));
+            Bst<int> bst = new Bst<int>(new BinNode<int>(15));
             bst.InsertAsLC(bst.Root(), 10);
             bst.InsertAsRC(bst.Root(), 20);
             var aaa = bst.Search(21);

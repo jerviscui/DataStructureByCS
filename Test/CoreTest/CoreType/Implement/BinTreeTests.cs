@@ -25,7 +25,8 @@ namespace Core.CoreType.Implement.Tests
             tree.InsertAsLC(tree.Root(), 15);
             Assert.IsTrue(tree.Root().LChild.Height == 0, "lchild");
             tree.InsertAsLC(tree.Root().LChild, 16);
-            Assert.IsTrue(tree.UpdateHeight(tree.Root().LChild) == 1);
+            tree.UpdateHeightAbove(tree.Root().LChild);
+            Assert.IsTrue(tree.Root().LChild.Height == 1);
         }
 
         [TestMethod()]

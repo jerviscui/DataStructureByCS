@@ -68,6 +68,7 @@
     <Compile Include="CoreType\Implement\MyListNode.cs" />
     <Compile Include="CoreType\Implement\MyQueue.cs" />
     <Compile Include="CoreType\Implement\MyStack.cs" />
+    <Compile Include="CoreType\Implement\RedBlack.cs" />
     <Compile Include="CoreType\Implement\Splay.cs" />
     <Compile Include="CoreType\Implement\Vector.cs" />
     <Compile Include="CoreType\Implement\Vertex.cs" />

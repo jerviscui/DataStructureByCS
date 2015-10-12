@@ -20,6 +20,8 @@ namespace Core.CoreType.Define
         /// </summary>
         int Height { get; set; }
 
+        NodeColor Color { get; set; }
+
         IBinNode<T> LChild { get; set; }
 
         IBinNode<T> RChild { get; set; }
@@ -71,5 +73,11 @@ namespace Core.CoreType.Define
         /// </summary>
         /// <param name="action"></param>
         void TravPost(Action<T> action);
+    }
+
+    public enum NodeColor
+    {
+        Red = 1,
+        Black = 2
     }
 }

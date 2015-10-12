@@ -9,21 +9,21 @@ using Core.CoreType.Define;
 
 namespace Core.CoreType.Implement
 {
-    public class BTNode<T> : IBTNode<T>, IComparable<BTNode<T>> where T : IComparable<T>
+    public class BtNode<T> : IBTNode<T>, IComparable<BtNode<T>> where T : IComparable<T>
     {
-        private BTNode<T> _parent;
+        private BtNode<T> _parent;
 
         private Vector<T> _key;
 
-        private Vector<BTNode<T>> _children;
+        private Vector<BtNode<T>> _children;
 
-        public BTNode()
+        public BtNode()
         {
             _key = new MyStack<T>();
-            _children = new MyStack<BTNode<T>>();
+            _children = new MyStack<BtNode<T>>();
         }
 
-        public BTNode(T e, BTNode<T> lc = null, BTNode<T> rc = null) : base()
+        public BtNode(T e, BtNode<T> lc = null, BtNode<T> rc = null) : base()
         {
             _key.Insert(0, e);
             _children.Insert(0, lc);
@@ -45,7 +45,7 @@ namespace Core.CoreType.Implement
         /// A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="other"/> in the sort order.  Zero This instance occurs in the same position in the sort order as <paramref name="other"/>. Greater than zero This instance follows <paramref name="other"/> in the sort order. 
         /// </returns>
         /// <param name="other">An object to compare with this instance. </param>
-        public int CompareTo(BTNode<T> other)
+        public int CompareTo(BtNode<T> other)
         {
             throw new NotImplementedException();
         }
@@ -53,7 +53,7 @@ namespace Core.CoreType.Implement
         public IBTNode<T> Parent
         {
             get { return _parent as IBTNode<T>; }
-            set { _parent = value as BTNode<T>; }
+            set { _parent = value as BtNode<T>; }
         }
 
         public IVector<T> Key
@@ -64,7 +64,7 @@ namespace Core.CoreType.Implement
 
         public IVector<IBTNode<T>> Children {
             get { return _children as IVector<IBTNode<T>>; }
-            set { _children = value as Vector<BTNode<T>>; }
+            set { _children = value as Vector<BtNode<T>>; }
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Core.CoreType.Implement
         /// virtual
         /// </summary>
         /// <returns></returns>
-        public virtual int UpdateHeight(IBinNode<T> node)
+        protected virtual int UpdateHeight(IBinNode<T> node)
         {
             int height = 1 + Math.Max(node.LChild != null ? node.LChild.Height : -1,
                 node.RChild != null ? node.RChild.Height : -1);

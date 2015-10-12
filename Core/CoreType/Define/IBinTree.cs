@@ -10,12 +10,6 @@ namespace Core.CoreType.Define
     public interface IBinTree<T>
     {
         /// <summary>
-        /// virtual
-        /// </summary>
-        /// <returns></returns>
-        int UpdateHeight(IBinNode<T> node);
-
-        /// <summary>
         /// update the height of all the parent nodes
         /// </summary>
         /// <param name="node"></param>
