@@ -8,9 +8,9 @@ using Core.CoreType.Define;
 
 namespace Core.CoreType.Implement
 {
-    public class BST<T> : BinTree<T>, IBST<T> where T : IComparable<T>
+    public class Bst<T> : BinTree<T>, IBST<T> where T : IComparable<T>
     {
-        public BST(BinNode<T> node) : base(node)
+        public Bst(BinNode<T> node) : base(node)
         {
 
         }
@@ -67,8 +67,8 @@ namespace Core.CoreType.Implement
         #region Public
         public virtual IBinNode<T> Search(T data)
         {
-            _hot = null;
-            return SearchIn(Root(), data, ref _hot);
+            Hot = null;
+            return SearchIn(Root(), data, ref Hot);
         }
 
         public virtual IBinNode<T> Insert(T data)
@@ -76,13 +76,13 @@ namespace Core.CoreType.Implement
             IBinNode<T> node = Search(data);
             if (node == null)
             {
-                if (_hot.Data.CompareTo(data) < 0)
+                if (Hot.Data.CompareTo(data) < 0)
                 {
-                    node = _hot.InsertAsRC(data);
+                    node = Hot.InsertAsRC(data);
                 }
                 else
                 {
-                    node = _hot.InsertAsLC(data);
+                    node = Hot.InsertAsLC(data);
                 }
                 _size++;
                 UpdateHeightAbove(node);
@@ -98,8 +98,8 @@ namespace Core.CoreType.Implement
             {
                 return false;
             }
-            node = RemoveAt(node, ref _hot);
-            UpdateHeightAbove(node ?? _hot);
+            node = RemoveAt(node, ref Hot);
+            UpdateHeightAbove(node ?? Hot);
             _size--;
 
             return true;
@@ -107,7 +107,7 @@ namespace Core.CoreType.Implement
 
         #endregion
 
-        protected IBinNode<T> _hot;
+        protected IBinNode<T> Hot;
 
         /// <summary>
         /// 3节点4子树

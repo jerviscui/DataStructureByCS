@@ -10,12 +10,12 @@ namespace Core.CoreType.Implement
     public class BTree<T> : IBTree<T> where T : IComparable<T>
     {
         //关键码总数
-        protected int _size;
+        protected int Size;
         //阶次
-        protected int _order;
-        protected BTNode<T> _root;
+        protected int Order;
+        protected BtNode<T> Root;
         //最后访问的非空节点
-        protected BTNode<T> _hot;
+        protected BtNode<T> Hot;
 
         protected void SolveOverFlow()
         {
@@ -29,8 +29,8 @@ namespace Core.CoreType.Implement
 
         public IBTNode<T> Search(T data)
         {
-            BTNode<T> v = _root;
-            _hot = null;
+            BtNode<T> v = Root;
+            Hot = null;
 
             while (v != null)
             {
@@ -40,9 +40,9 @@ namespace Core.CoreType.Implement
                     return v;
                 }
 
-                _hot = v;
+                Hot = v;
                 //注意：向量查找返回不大于的最后一个元素，所以孩子的选择rank+1
-                v = v.Children[rank + 1] as BTNode<T>;
+                v = v.Children[rank + 1] as BtNode<T>;
             }
 
             return null;
@@ -56,11 +56,11 @@ namespace Core.CoreType.Implement
                 return false;
             }
 
-            int rank = _hot.Key.Search(data);
+            int rank = Hot.Key.Search(data);
 
-            _hot.Key.Insert(rank + 1, data);
-            _hot.Children.Insert(rank + 2, null);
-            _size++;
+            Hot.Key.Insert(rank + 1, data);
+            Hot.Children.Insert(rank + 2, null);
+            Size++;
             SolveOverFlow();
 
             return true;
@@ -90,7 +90,7 @@ namespace Core.CoreType.Implement
             }
             s.Key.Remove(rank);
             s.Children.Remove(rank + 1);
-            _size--;
+            Size--;
 
             SolveUnderFlow();
 

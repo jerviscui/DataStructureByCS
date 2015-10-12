@@ -25,6 +25,18 @@ namespace Core.CoreType.Implement
             Height = 0;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:System.Object"/> class.
+        /// </summary>
+        public BinNode(T data, BinNode<T> parent, BinNode<T> lChild, BinNode<T> rChild, int height)
+        {
+            _lChild = lChild;
+            _rChild = rChild;
+            _parent = parent;
+            _data = data;
+            Height = height;
+        }
+
         #region Private Method
 
         private void VistAlongLeftBranch(BinNode<T> node, Action<T> action, ref MyStack<BinNode<T>> stack)
@@ -93,6 +105,8 @@ namespace Core.CoreType.Implement
         /// hight of the tree with this for root
         /// </summary>
         public int Height { get; set; }
+
+        public NodeColor Color { get; set; }
 
         public IBinNode<T> LChild
         {

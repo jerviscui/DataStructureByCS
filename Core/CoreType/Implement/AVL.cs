@@ -8,9 +8,9 @@ using Core.CoreType.Define;
 
 namespace Core.CoreType.Implement
 {
-    public class AVL<T> : BST<T> where T : IComparable<T>
+    public class Avl<T> : Bst<T> where T : IComparable<T>
     {
-        public AVL(BinNode<T> node) : base(node)
+        public Avl(BinNode<T> node) : base(node)
         {
 
         }
@@ -68,13 +68,13 @@ namespace Core.CoreType.Implement
             IBinNode<T> node = Search(data);
             if (node == null)
             {
-                if (_hot.Data.CompareTo(data) < 0)
+                if (Hot.Data.CompareTo(data) < 0)
                 {
-                    node = _hot.InsertAsRC(data);
+                    node = Hot.InsertAsRC(data);
                 }
                 else
                 {
-                    node = _hot.InsertAsLC(data);
+                    node = Hot.InsertAsLC(data);
                 }
                 _size++;
                 //AVL make tree is BBST, dont have this step
@@ -105,9 +105,9 @@ namespace Core.CoreType.Implement
             {
                 return false;
             }
-            node = RemoveAt(node, ref _hot);
+            node = RemoveAt(node, ref Hot);
 
-            for (IBinNode<T> g = _hot; g != null; g = g.Parent)
+            for (IBinNode<T> g = Hot; g != null; g = g.Parent)
             {
                 if (!AvlBalanced(g))
                 {

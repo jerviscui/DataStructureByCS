@@ -8,7 +8,7 @@ using Core.CoreType.Define;
 
 namespace Core.CoreType.Implement
 {
-    public class Splay<T> : BST<T> where T : IComparable<T>
+    public class Splay<T> : Bst<T> where T : IComparable<T>
     {
         public Splay(BinNode<T> node) : base(node)
         {
@@ -130,7 +130,7 @@ namespace Core.CoreType.Implement
         {
             IBinNode<T> node =  base.Search(data);
 
-            _root = MakeSplay(node ?? _hot);
+            _root = MakeSplay(node ?? Hot);
             //注意：失败的时候，返回了一个近似的节点
             return _root;
         }

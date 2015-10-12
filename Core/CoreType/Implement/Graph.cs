@@ -219,7 +219,7 @@ namespace Core.CoreType.Implement
 
         #region Public
 
-        public void BFS(int v, ref int clock)
+        public void Bfs(int v, ref int clock)
         {
             MyQueue<int> queue = new MyQueue<int>();
             queue.EnQueue(v);
@@ -250,7 +250,7 @@ namespace Core.CoreType.Implement
         /// <summary>
         /// 如果图拥有多个连通域
         /// </summary>
-        public void BFSAll(int s)
+        public void BfsAll(int s)
         {
             Reset();
             int clock = 0;
@@ -259,13 +259,13 @@ namespace Core.CoreType.Implement
             {
                 if (_vertexes[v].Status == VStatus.Undiscovered)
                 {
-                    BFS(v, ref clock);
+                    Bfs(v, ref clock);
                 }
             } while (s != (v = ++v % _vertexCount));
             // 该循环条件很有意思，确实完成了所有节点的遍历
         }
 
-        public void DFS(int v, ref int clock)
+        public void Dfs(int v, ref int clock)
         {
             _vertexes[v].Status = VStatus.Discovered;
             _vertexes[v].DisTime = ++clock;
@@ -279,7 +279,7 @@ namespace Core.CoreType.Implement
                     case VStatus.Undiscovered:
                         _vertexes[i].Status = VStatus.Discovered;
                         _edges[v][i].Status = EStatus.Tree;
-                        DFS(i, ref clock);
+                        Dfs(i, ref clock);
                         break;
                     case VStatus.Discovered:
                         _edges[v][i].Status = EStatus.Backward;
@@ -297,7 +297,7 @@ namespace Core.CoreType.Implement
             _vertexes[v].FTime = ++clock;
         }
 
-        public void DFSAll(int s)
+        public void DfsAll(int s)
         {
             Reset();
             int clock = 0;
@@ -306,7 +306,7 @@ namespace Core.CoreType.Implement
             {
                 if (_vertexes[v].Status == VStatus.Undiscovered)
                 {
-                    DFS(v, ref clock);
+                    Dfs(v, ref clock);
                 }
             } while (s != (v = ++v % _vertexCount));
         }
